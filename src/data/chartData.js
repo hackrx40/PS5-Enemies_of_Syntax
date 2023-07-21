@@ -154,11 +154,11 @@ export const barChartOptions = {
 
 export const salesLineChartData = [
   {
-    name: "Marketing Sales",
+    name: "Expenditure",
     data: [50, 64, 48, 24, 49, 68],
   },
   {
-    name: "Cases Sales",
+    name: "Savings",
     data: [70, 25, 76, 46, 20, 46],
   },
 ];
@@ -314,10 +314,19 @@ export const dailyVisitsBarChartOptions = {
   },
 };
 
-export const salesReportPieChartData = [63, 25];
+export const salesReportPieChartData = [15, 15, 10, 15, 5, 10, 25, 5];
 
 export const salesReportPieChartOptions = {
-  labels: ["Online Sales", "Offline Sales"],
+  labels: [
+    "Groceries",
+    "DineOut",
+    "Travel",
+    "Utilities",
+    "Insurance",
+    "Medicine",
+    "Recreation",
+    "Misc",
+  ],
   states: {
     hover: {
       filter: {
@@ -340,7 +349,16 @@ export const salesReportPieChartOptions = {
       },
     },
   },
-  colors: ["rgba(100, 39, 255, 0.5)", "rgba(196, 156, 26, 0.5)"],
+  colors: [
+    "rgba(100, 39, 255, 0.5)",
+    "rgb(243, 21, 89)",
+    "rgba(196, 156, 26, 0.5)",
+    "rgb(0,143,251)",
+    "rgb(0,227,150)",
+    "rgb(237,75,83)",
+    "rgb(13, 18, 130)",
+    "rgb(255, 236, 175)"
+  ],
   tooltip: {
     style: {
       fontSize: "12px",

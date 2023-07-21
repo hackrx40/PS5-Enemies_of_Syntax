@@ -25,7 +25,7 @@ export const transactionsColumns = [
             {"Debit"}
           </span>
         )}
-        {row.original.transaction_type === "CED" && (
+        {row.original.transaction_type === "CRE" && (
           <span
             className="status"
             style={{ color: "#fd4332", backgroundColor: "#fd433233" }}

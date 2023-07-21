@@ -21,7 +21,7 @@ const SalesAnalytics = () => {
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
       <Typography variant="h6" sx={{ marginBottom: "14px" }}>
-        Sales Analytics
+        Yearly finances
       </Typography>
       <ComponentWrapper>
         <Grid container spacing={3}>
@@ -66,7 +66,7 @@ const SalesAnalytics = () => {
               }}
             >
               <Typography variant="h6" sx={{ mb: 2 }}>
-                Sales Report
+                Money spent on different categories
               </Typography>
               <SalesReportChart
                 chartOptions={salesReportPieChartOptions}

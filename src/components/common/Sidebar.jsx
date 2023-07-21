@@ -14,7 +14,7 @@ const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
         <RiAuctionLine className="text-2xl text-white" />
 
         <Typography variant="h6" sx={{ fontWeight: "bold", ml: 2 }}>
-          Finance Guru
+          Finance<span style={{ color: "#FDC448" }} >Guru</span> 
         </Typography>
       </Toolbar>
       <Divider />

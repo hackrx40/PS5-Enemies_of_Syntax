@@ -1,14 +1,25 @@
-import { Grid } from "@mui/material";
+import { Grid, MenuItem, Select } from "@mui/material";
 import React from "react";
 import { Box, Card, CardContent, Paper, Typography } from "@mui/material";
 import styled from "@emotion/styled";
-import { BsGraphUpArrow,BsGraphDownArrow } from "react-icons/bs";
+import { BsGraphUpArrow, BsGraphDownArrow } from "react-icons/bs";
+import CountUp from "react-countup";
 
 const UserDashboardData = () => {
   const ComponentWrapper = styled(Box)({
     marginTop: "10px",
     paddingBottom: "10px",
   });
+
+  const [freq, setFreq] = React.useState("yearly");
+  const [amount, setAmount] = React.useState(100000);
+
+  const handleChange = (event) => {
+    setFreq(event.target.value);
+    if (event.target.value === "yearly") setAmount(100000);
+    else if (event.target.value === "monthly") setAmount(5000);
+    else if (event.target.value === "weekly") setAmount(750);
+  };
 
   return (
     <Box sx={{ pt: "80px", pb: "20px" }}>
@@ -110,16 +121,34 @@ const UserDashboardData = () => {
                   borderColor: "divider",
                   height: "100%",
                   padding: "35px",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                 }}
               >
-                <Typography variant="h6">Total Income</Typography>
-                <Typography variant="h4" style={{ color: "#11141c" }}>
-                  ₹ 10000
-                </Typography>
-                <Typography>
-                  <BsGraphUpArrow style={{color:"green",fontSize:"20px"}}/> &nbsp;
-                  18.07% Increase
-                </Typography>
+                <div>
+                  <Typography variant="h6">Total Income</Typography>
+                  <Typography variant="h4" style={{ color: "#11141c" }}>
+                    ₹ <CountUp end={amount} duration={2} />
+                  </Typography>
+                  <Typography>
+                    <BsGraphUpArrow
+                      style={{ color: "green", fontSize: "20px" }}
+                    />
+                    &nbsp; 18.07% Increase
+                  </Typography>
+                </div>
+                <div>
+                  <Select
+                    label="Frequency"
+                    value={freq}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="yearly">Yearly</MenuItem>
+                    <MenuItem value="monthly">Monthly</MenuItem>
+                    <MenuItem value="weekly">Weekly</MenuItem>
+                  </Select>
+                </div>
               </Paper>
             </ComponentWrapper>
           </Grid>
@@ -141,8 +170,10 @@ const UserDashboardData = () => {
                   ₹ 10000
                 </Typography>
                 <Typography>
-                  <BsGraphDownArrow style={{color:"red",fontSize:"20px"}}/> &nbsp;
-                  20.07% Decrease
+                  <BsGraphDownArrow
+                    style={{ color: "red", fontSize: "20px" }}
+                  />{" "}
+                  &nbsp; 20.07% Decrease
                 </Typography>
               </Paper>
             </ComponentWrapper>

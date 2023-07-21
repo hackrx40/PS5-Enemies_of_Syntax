@@ -15,7 +15,7 @@ const BarChart = () => {
         borderColor: "divider",
       }}
     >
-      <Typography variant="h5">Sales Statistics</Typography>
+      <Typography variant="h5">Yearly finances</Typography>
       <Chart
         options={barChartOptions}
         series={barChartData}

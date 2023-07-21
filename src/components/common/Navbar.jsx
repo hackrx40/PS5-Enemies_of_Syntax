@@ -98,7 +98,7 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
                 variant="h5"
                 sx={{ display: { xs: "none", sm: "block" } }}
               >
-                Welcome to Finance <span style={{ color: "#FDC448" }} >Guru</span> 
+                Welcome to Finance<span style={{ color: "#FDC448" }} >Guru</span> 
               </Typography>
             </Link>
           </Box>
