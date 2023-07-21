@@ -87,6 +87,9 @@ const data =
 
 const Coupons = () => {
     const CouponLayout = ({ title, description, discount, valid_until, value }) => {
+
+        const [coupon, setCoupon] = React.useState("######");
+
         return (
             <Container>
                 <div className='coupon-card'>
@@ -95,14 +98,20 @@ const Coupons = () => {
                             <Typography sx={{ fontSize: "1.2rem" }} component="div">
                                 {discount}% OFF
                             </Typography>
-                            <b>Category</b> <br />
-                            <span> {description} </span>
+                            <b>{description}</b> <br />
                         </div>
                         <div>
                             <Typography sx={{ color: "green", fontWeight: "600" }} variant="h5" component="div">
-                                {title}
+                                {coupon}
                             </Typography>
                             <span style={{ fontSize: "0.7rem" }}>Valid till {valid_until}</span>
+                            <br />
+                            {coupon == "######" ? <Button variant="contained" onClick={() => {
+                                setCoupon(title);
+                            }} style={{ backgroundColor: "#f50057", color: "white", marginTop: "10px" }}>Redeem</Button>
+                                :
+                                null}
+
                         </div>
                     </div>
                     <div className='circle1'></div>

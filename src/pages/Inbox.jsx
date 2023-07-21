@@ -1,6 +1,7 @@
 import { CometChat } from "@cometchat-pro/chat";
 import { CometChatGroupListWithMessages } from "../cometchat-pro-react-ui-kit/CometChatWorkspace/src/components";
 import Navbar from "../components/common/Navbar";
+import Sidebar from "../components/common/Sidebar";
 
 const appID = "238598e661dfab4c";
 const region = "us";
