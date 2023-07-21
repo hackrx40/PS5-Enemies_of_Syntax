@@ -5,16 +5,25 @@ import SidebarItem from "./SidebarItem";
 import SidebarItemCollapse from "./SidebarItemCollapse";
 import { useLocation } from 'react-router-dom';
 import { RiAuctionLine } from "react-icons/ri"
-
+import { BsFire } from "react-icons/bs"
+import toast, { Toaster } from 'react-hot-toast';
 
 const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
+
+  const notify = () => toast('Welcome back to FinanceGuru!', {
+    icon: '👏',
+    ariaProps: {
+      role: 'status',
+      'aria-live': 'polite',
+    }
+  },);
   const drawer = (
     <div>
       <Toolbar>
         <RiAuctionLine className="text-2xl text-white" />
-
-        <Typography variant="h6" sx={{ fontWeight: "bold", ml: 2 }}>
-          Finance<span style={{ color: "#FDC448" }} >Guru</span> 
+        <Toaster />
+        <Typography onMouseOver={notify} variant="h6" sx={{ fontWeight: "bold", ml: 2 }}>
+          Finance<span style={{ color: "#FDC448" }} >Guru</span>
         </Typography>
       </Toolbar>
       <Divider />
@@ -27,6 +36,22 @@ const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
           )
         )}
       </List>
+      <center>
+        <div style={{
+          backgroundColor: "#FDC448",
+          borderRadius: 10,
+          position: "fixed",
+          bottom: 5,
+          textAlign: "center",
+          padding: 10,
+          fontWeight: "bold",
+          color: "#111827",
+          left: 33,
+        }}>
+          <div>Active streak 5 <BsFire style={{ fontSize: "1.1rem", transform: "translateY(2.4px)" }} /></div>
+
+        </div>
+      </center>
     </div>
   );
 
@@ -36,7 +61,7 @@ const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
   const location = useLocation();
   const path = location.pathname;
   return (
-    path==='/login' || path==='/signup' || path==="/inbox" || path==="/otp" ? null :
+    path === '/login' || path === '/signup' || path === "/inbox" || path === "/otp" ? null :
       <Box
         component="nav"
         sx={{ width: { md: sideBarWidth }, flexShrink: { md: 0 } }}
