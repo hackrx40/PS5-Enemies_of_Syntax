@@ -31,7 +31,7 @@ const UserDashboardData = () => {
   };
 
   return (
-    <Box sx={{ pt: "80px", pb: "20px" }}>
+    <Box >
       <ComponentWrapper>
         <Grid container spacing={1}>
           <Grid item lg={3}>

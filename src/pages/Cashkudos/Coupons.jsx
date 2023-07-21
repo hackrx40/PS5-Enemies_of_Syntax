@@ -101,7 +101,7 @@ const data = {
   ],
 };
 
-const Coupons = ({setPoint}) => {
+const Coupons = ({setPoints, points}) => {
   const CouponLayout = ({
     title,
     description,
@@ -110,6 +110,12 @@ const Coupons = ({setPoint}) => {
     value,
   }) => {
     const [coupon, setCoupon] = React.useState("######");
+
+    const handleRedemption = (title, value) => {
+      setCoupon(title);
+      setPoints((prev)=>prev-value);
+      console.log(title, points);
+    };
 
     return (
       <Container>
@@ -146,8 +152,7 @@ const Coupons = ({setPoint}) => {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    // setPoint((prev)=>prev-value);
-                    setCoupon(title);
+                    handleRedemption(title, value);
                   }}
                   style={{
                     backgroundColor: "#f50057",

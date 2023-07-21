@@ -131,7 +131,7 @@ const CashKudos = () => {
                 </Grid>
             </Grid>
         </ComponentWrapper>
-        <Coupons setPoint={setPoints}/>
+        <Coupons setPoints={setPoints} points={points}/>
 
     </Box>;
 }
