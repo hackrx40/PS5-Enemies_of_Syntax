@@ -15,7 +15,7 @@ const AveargeTotals = () => {
         padding: "16px",
       }}
     >
-      <Typography variant="h5">Average Total Earnings</Typography>
+      <Typography variant="h5">Expenditure Modes</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
         2022-2023
       </Typography>
@@ -37,7 +37,7 @@ const AveargeTotals = () => {
               92,980
             </Typography>
             <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
-              Cases
+              UPI
             </Typography>
           </Box>
         </Box>
@@ -49,7 +49,7 @@ const AveargeTotals = () => {
               23,980
             </Typography>
             <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
-              Applications
+              Debit Card
             </Typography>
           </Box>
         </Box>
@@ -61,7 +61,7 @@ const AveargeTotals = () => {
               14,980
             </Typography>
             <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
-              Products
+              Others
             </Typography>
           </Box>
         </Box>

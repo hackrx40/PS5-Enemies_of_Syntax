@@ -250,10 +250,6 @@ export const dailyVisitsBarChartData = [
     name: "Expenditure",
     data: [44, 55, 57, 56],
   },
-  {
-    name: "Savings",
-    data: [76, 85, 101, 98],
-  },
 ];
 
 export const dailyVisitsBarChartOptions = {
