@@ -1,0 +1,376 @@
+{
+  "FinancialSummary": [
+    {
+      "Profile": {
+        "Holders": {
+          "Holder": {
+            "name": "Jon Doe",
+            "mobile": "18002026161",
+            "address": "1007 Mountain Drive, Gotham",
+            "email": "jon.doe@mail.com",
+            "pan": "ABCPD1234A",
+            "ckycCompliance": true
+          }
+        }
+      },
+      "Summary": {
+        "Pending": {
+          "transactionType": "CREDIT",
+          "amount": 0
+        },
+        "currentBalance": "3991.11",
+        "currency": "INR",
+        "exchgeRate": "1.0",
+        "balanceDateTime": "2022-11-30T00:00:00.000+00:00",
+        "type": "SAVINGS",
+        "branch": "HDFC0000573",
+        "facility": "CC",
+        "ifscCode": "HDFC0000573",
+        "micrCode": "12345678",
+        "openingDate": "2020-12-03",
+        "currentODLimit": "0",
+        "drawingLimit": "0",
+        "status": "ACTIVE"
+      },
+      "Transactions": {
+        "Transaction": [
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 15865,
+            "currentBalance": "15889.36",
+            "transactionTimestamp": "2022-11-19T00:00:00.000+00:00",
+            "valueDate": "2022-11-19",
+            "txnId": "dummy",
+            "narration": "SALARY SHANKAR FENESTRATIONS & GLASSES I NDIA P LTD",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 500,
+            "currentBalance": "15389.36",
+            "transactionTimestamp": "2022-11-19T00:00:00.000+00:00",
+            "valueDate": "2022-11-19",
+            "txnId": "dummy",
+            "narration": "UPI-KULDEEP S O CHATTAR -KULDEEP9650@YBL -PUNB0679900-232343088841-NA (Ref# 232343088841)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 200,
+            "currentBalance": "15189.36",
+            "transactionTimestamp": "2022-11-19T00:00:00.000+00:00",
+            "valueDate": "2022-11-19",
+            "txnId": "dummy",
+            "narration": "UPI-LATA-PAYTM-73272027@PAYTM-PYTM0123456-232368787534-OID202211192030370 (Ref# 232368787534)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 150,
+            "currentBalance": "15039.36",
+            "transactionTimestamp": "2022-11-19T00:00:00.000+00:00",
+            "valueDate": "2022-11-19",
+            "txnId": "dummy",
+            "narration": "UPI-RG SONS AND OTHERS L-PAYTM-70153610@ PAYTM-PYTM0123456-232392321751-OID202211192141160 (Ref# 232392321751)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 150,
+            "currentBalance": "14889.36",
+            "transactionTimestamp": "2022-11-19T00:00:00.000+00:00",
+            "valueDate": "2022-11-19",
+            "txnId": "dummy",
+            "narration": "UPI-VIJAY KUMAR-PAYTM-62448237@PAYTM-PYT M0123456-232374539066-OID202211192145340 (Ref# 232374539066)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 3,
+            "currentBalance": "14886.36",
+            "transactionTimestamp": "2022-11-19T00:00:00.000+00:00",
+            "valueDate": "2022-11-19",
+            "txnId": "dummy",
+            "narration": "UPI-LAXMI DAS-PAYTM-70579281@PAYTM-PYTM0123456-232374604923-OID202211192146440 (Ref# 232374604923)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 10,
+            "currentBalance": "14876.36",
+            "transactionTimestamp": "2022-11-19T00:00:00.000+00:00",
+            "valueDate": "2022-11-19",
+            "txnId": "dummy",
+            "narration": "UPI-LAXMI DAS-PAYTM-70579281@PAYTM-PYTM0123456-232374800857-OID202211192149590 (Ref# 232374800857)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 10,
+            "currentBalance": "14866.36",
+            "transactionTimestamp": "2022-11-19T00:00:00.000+00:00",
+            "valueDate": "2022-11-19",
+            "txnId": "dummy",
+            "narration": "UPI-LAXMI DAS-PAYTM-70579281@PAYTM-PYTM0123456-232375095057-OID202211192155020 (Ref# 232375095057)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 60,
+            "currentBalance": "14806.36",
+            "transactionTimestamp": "2022-11-19T00:00:00.000+00:00",
+            "valueDate": "2022-11-19",
+            "txnId": "dummy",
+            "narration": "UPI-BHAGAVAN DAS-PAYTM-67127062@PAYTM-PY TM0123456-232375548273-OID202211192203230 (Ref# 232375548273)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 260,
+            "currentBalance": "14546.36",
+            "transactionTimestamp": "2022-11-20T00:00:00.000+00:00",
+            "valueDate": "2022-11-20",
+            "txnId": "dummy",
+            "narration": "UPI-RAHUL TYAGI-PAYTM-25466413@PAYTM-PYT M0123456-232416033796-OID202211201155150 (Ref# 232416033796)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 250,
+            "currentBalance": "14296.36",
+            "transactionTimestamp": "2022-11-20T00:00:00.000+00:00",
+            "valueDate": "2022-11-20",
+            "txnId": "dummy",
+            "narration": "UPI-RAHUL TYAGI-PAYTM-25466413@PAYTM-PYT M0123456-232426387136-OID202211201159550 (Ref# 232426387136)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 9801,
+            "currentBalance": "4495.36",
+            "transactionTimestamp": "2022-11-20T00:00:00.000+00:00",
+            "valueDate": "2022-11-20",
+            "txnId": "dummy",
+            "narration": "UPI-CRED-CRED.CCBP@YESBANK-YESB0000022-232425997936-CRED (Ref# 232425997936)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 200,
+            "currentBalance": "4295.36",
+            "transactionTimestamp": "2022-11-21T00:00:00.000+00:00",
+            "valueDate": "2022-11-21",
+            "txnId": "dummy",
+            "narration": "UPI-ARVIND KUMAR-6397351773@PAYTM-HDFC0000573-232557005496-NA (Ref# 232557005496)",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 1,
+            "currentBalance": "4296.36",
+            "transactionTimestamp": "2022-11-22T00:00:00.000+00:00",
+            "valueDate": "2022-11-22",
+            "txnId": "dummy",
+            "narration": "UPI-FPL TECHNOLOGIES PRI-ONECARD@IDFCBAN K-IDFB0040101-232613598079-ONECARD VERIF ICATI (Ref# 232613598079)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 200,
+            "currentBalance": "4096.36",
+            "transactionTimestamp": "2022-11-22T00:00:00.000+00:00",
+            "valueDate": "2022-11-22",
+            "txnId": "dummy",
+            "narration": "UPI-ANIL KUMAR-9759561057@PAYTM-ICIC0001578-232635971429-NA (Ref# 232635971429)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 120,
+            "currentBalance": "3976.36",
+            "transactionTimestamp": "2022-11-22T00:00:00.000+00:00",
+            "valueDate": "2022-11-22",
+            "txnId": "dummy",
+            "narration": "UPI-URMILA SHARMA-PAYTM-70358060@PAYTM-P YTM0123456-232654371517-OID202211221834430 (Ref# 232654371517)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 825,
+            "currentBalance": "3151.36",
+            "transactionTimestamp": "2022-11-23T00:00:00.000+00:00",
+            "valueDate": "2022-11-23",
+            "txnId": "dummy",
+            "narration": "UPI-ABHISHEK TYAGI-Q663749893@YBL-YESB0Y BLUPI-232766411309-NA (Ref# 232766411309)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 1050,
+            "currentBalance": "2101.36",
+            "transactionTimestamp": "2022-11-24T00:00:00.000+00:00",
+            "valueDate": "2022-11-24",
+            "txnId": "dummy",
+            "narration": "UPI-BAJAJ PRIME FUELS HP-PAYTM-544978@PA YTM-PYTM0123456-232883998131-OID202211240843070 (Ref# 232883998131)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 1200,
+            "currentBalance": "901.36",
+            "transactionTimestamp": "2022-11-25T00:00:00.000+00:00",
+            "valueDate": "2022-11-25",
+            "txnId": "dummy",
+            "narration": "UPI-UPKAR RAGHAV-UPKARRAGHAV0@PAYTM-DBSS 0IN0811-232900957131-NA (Ref# 232900957131)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 155.25,
+            "currentBalance": "746.11",
+            "transactionTimestamp": "2022-11-25T00:00:00.000+00:00",
+            "valueDate": "2022-11-25",
+            "txnId": "dummy",
+            "narration": "UPI-AIRTEL-PAYAIR7673@PAYTM-PYTM0123456-232980083720-OID19713587225@AIR (Ref# 232980083720)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 30,
+            "currentBalance": "716.11",
+            "transactionTimestamp": "2022-11-25T00:00:00.000+00:00",
+            "valueDate": "2022-11-25",
+            "txnId": "dummy",
+            "narration": "UPI-BHAGAVAN DAS-PAYTM-67127062@PAYTM-PY TM0123456-232950017471-OID202211251827570 (Ref# 232950017471)",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 4000,
+            "currentBalance": "4716.11",
+            "transactionTimestamp": "2022-11-26T00:00:00.000+00:00",
+            "valueDate": "2022-11-26",
+            "txnId": "dummy",
+            "narration": "UPI-KULDEEP-9650946599@PAYTM-PYTM0123456 -233038599672-NA (Ref# 233038599672)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 120,
+            "currentBalance": "4596.11",
+            "transactionTimestamp": "2022-11-26T00:00:00.000+00:00",
+            "valueDate": "2022-11-26",
+            "txnId": "dummy",
+            "narration": "UPI-URMILA SHARMA-PAYTM-70358060@PAYTM-P YTM0123456-233066363288-OID202211262000530 (Ref# 233066363288)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 282,
+            "currentBalance": "4314.11",
+            "transactionTimestamp": "2022-11-28T00:00:00.000+00:00",
+            "valueDate": "2022-11-28",
+            "txnId": "dummy",
+            "narration": "UPI-ECOMEXPRESS-PAYPHI.ECOMEXPRESS@ICICI -ICIC0DC0099-233230568121-NA (Ref# 233230568121)",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 100,
+            "currentBalance": "4414.11",
+            "transactionTimestamp": "2022-11-28T00:00:00.000+00:00",
+            "valueDate": "2022-11-28",
+            "txnId": "dummy",
+            "narration": "UPI-NAVAL KUMAR-8506813097@PAYTM-IOBA0000457-233242078471-NA (Ref# 233242078471)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 277,
+            "currentBalance": "4137.11",
+            "transactionTimestamp": "2022-11-29T00:00:00.000+00:00",
+            "valueDate": "2022-11-29",
+            "txnId": "dummy",
+            "narration": "UPI-SHADOWFAX TECHNOLOGI-BHARATPE30059351755@YESBANKLTD-YESB0YESUPI-233325041546 -PAY BY WHATSAPP (Ref# 233325041546)",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 200,
+            "currentBalance": "4337.11",
+            "transactionTimestamp": "2022-11-29T00:00:00.000+00:00",
+            "valueDate": "2022-11-29",
+            "txnId": "dummy",
+            "narration": "UPI-ARVIND KUMAR-ARVINDCHANDELA15790-1@O KHDFCBANK-HDFC0000573-233325172662-UPI (Ref# 233325172662)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 120,
+            "currentBalance": "4217.11",
+            "transactionTimestamp": "2022-11-30T00:00:00.000+00:00",
+            "valueDate": "2022-11-30",
+            "txnId": "dummy",
+            "narration": "UPI-URMILA SHARMA-PAYTM-70358060@PAYTM-P YTM0123456-233451486238-OID202211301839210 (Ref# 233451486238)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 26,
+            "currentBalance": "4191.11",
+            "transactionTimestamp": "2022-11-30T00:00:00.000+00:00",
+            "valueDate": "2022-11-30",
+            "txnId": "dummy",
+            "narration": "UPI-SUKHADEV SO DHIRAJ S-8860259325@IBL-PUNB0220400-233452687085-NA (Ref# 233452687085)",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 200,
+            "currentBalance": "3991.11",
+            "transactionTimestamp": "2022-11-30T00:00:00.000+00:00",
+            "valueDate": "2022-11-30",
+            "txnId": "dummy",
+            "narration": "UPI-MANAVENDRA GARG-Q599230946@YBL-PUNB0478800-233464380844-NA (Ref# 233464380844)",
+            "reference": ""
+          }
+        ],
+        "startDate": "2022-11-14",
+        "endDate": "2023-11-14"
+      },
+      "type": "deposit",
+      "maskedAccNumber": "XXXXX9020",
+      "version": "1.2"
+    }
+  ]
+}
