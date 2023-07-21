@@ -52,11 +52,6 @@ export const Table = ({
       enableTopToolbar={enableTopToolBar}
       renderRowActions={({ row }) => (
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <Tooltip arrow placement="right" title="Delete">
-            <IconButton color="error" onClick={() => {}}>
-              <FiTrash />
-            </IconButton>
-          </Tooltip>
           {showPreview && (
             <Tooltip arrow placement="right" title="View">
               <Link to={`/${routeLink}/${row.id}`}>

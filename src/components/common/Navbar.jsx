@@ -48,7 +48,7 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
     setCounter(1);
   }, [counter]);
 
-  return path==="/login" || path==="/signup" || path==="/otp" ? null : (
+  return path === "/login" || path === "/signup" || path === "/otp" ? null : (
     <AppBar
       position="fixed"
       sx={{
@@ -83,8 +83,7 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
                 edge="start"
                 onClick={handleDrawerToggle}
                 sx={{ mr: 2, display: { md: "none" } }}
-              >
-              </IconButton>
+              ></IconButton>
             </Tooltip>
 
             <Link
@@ -98,19 +97,12 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
                 variant="h5"
                 sx={{ display: { xs: "none", sm: "block" } }}
               >
-                Welcome to Finance<span style={{ color: "#FDC448" }} >Guru</span> 
+                Welcome to Finance<span style={{ color: "#FDC448", fontWeight: "bold" }}>Guru</span>
               </Typography>
             </Link>
           </Box>
           <Stack direction="row" spacing={1} alignItems="center">
             <div id="google_translate_element"></div>
-            <Tooltip title="Notifications" arrow>
-              <IconButton sx={{ fontSize: "20px", color: "text.primary" }}>
-                <Badge color="error" variant="dot">
-                  <BsBell />
-                </Badge>
-              </IconButton>
-            </Tooltip>
             <Tooltip title="Toggle Theme" arrow>
               <IconButton
                 onClick={colorMode.toggleColorMode}

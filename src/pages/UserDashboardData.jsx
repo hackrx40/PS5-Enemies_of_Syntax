@@ -1,6 +1,6 @@
 import { Grid, MenuItem, Select } from "@mui/material";
 import React from "react";
-import { Box, Card, CardContent, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { BsGraphUpArrow, BsGraphDownArrow } from "react-icons/bs";
 import CountUp from "react-countup";
@@ -12,13 +12,22 @@ const UserDashboardData = () => {
   });
 
   const [freq, setFreq] = React.useState("yearly");
+  const [freq2, setFreq2] = React.useState("yearly");
   const [amount, setAmount] = React.useState(100000);
+  const [expense, setExpense] = React.useState(750000);
 
   const handleChange = (event) => {
     setFreq(event.target.value);
     if (event.target.value === "yearly") setAmount(100000);
     else if (event.target.value === "monthly") setAmount(5000);
     else if (event.target.value === "weekly") setAmount(750);
+  };
+
+  const handleChange2 = (event) => {
+    setFreq2(event.target.value);
+    if (event.target.value === "yearly") setExpense(750000);
+    else if (event.target.value === "monthly") setExpense(2000);
+    else if (event.target.value === "weekly") setExpense(300);
   };
 
   return (
@@ -129,7 +138,7 @@ const UserDashboardData = () => {
                 <div>
                   <Typography variant="h6">Total Income</Typography>
                   <Typography variant="h4" style={{ color: "#11141c" }}>
-                    ₹ <CountUp end={amount} duration={2} />
+                    ₹ <CountUp end={amount} duration={1} />
                   </Typography>
                   <Typography>
                     <BsGraphUpArrow
@@ -163,18 +172,34 @@ const UserDashboardData = () => {
                   borderColor: "divider",
                   height: "100%",
                   padding: "35px",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                 }}
               >
-                <Typography variant="h6">Total Expenses</Typography>
-                <Typography variant="h4" style={{ color: "#11141c" }}>
-                  ₹ 10000
-                </Typography>
-                <Typography>
-                  <BsGraphDownArrow
-                    style={{ color: "red", fontSize: "20px" }}
-                  />{" "}
-                  &nbsp; 20.07% Decrease
-                </Typography>
+                <div>
+                  <Typography variant="h6">Total Expenses</Typography>
+                  <Typography variant="h4" style={{ color: "#11141c" }}>
+                    ₹ <CountUp end={expense} duration={1} />
+                  </Typography>
+                  <Typography>
+                    <BsGraphDownArrow
+                      style={{ color: "red", fontSize: "20px" }}
+                    />
+                    &nbsp; 20.07% Decrease
+                  </Typography>
+                </div>
+                <div>
+                  <Select
+                    label="Frequency"
+                    value={freq2}
+                    onChange={handleChange2}
+                  >
+                    <MenuItem value="yearly">Yearly</MenuItem>
+                    <MenuItem value="monthly">Monthly</MenuItem>
+                    <MenuItem value="weekly">Weekly</MenuItem>
+                  </Select>
+                </div>
               </Paper>
             </ComponentWrapper>
           </Grid>
