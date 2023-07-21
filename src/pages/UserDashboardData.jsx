@@ -47,7 +47,7 @@ const UserDashboardData = () => {
                   padding: "35px",
                 }}
               >
-                <Typography variant="h6">Net Worth</Typography>
+                <Typography variant="h6">Net Profit</Typography>
                 <Typography variant="h4" style={{ color: "#11141c" }}>
                   ₹ 100000
                 </Typography>
@@ -68,7 +68,7 @@ const UserDashboardData = () => {
                   padding: "35px",
                 }}
               >
-                <Typography variant="h6">Total Cash used</Typography>
+                <Typography variant="h6">Your balance</Typography>
                 <Typography variant="h4" style={{ color: "#11141c" }}>
                   ₹ 50000
                 </Typography>
@@ -89,7 +89,7 @@ const UserDashboardData = () => {
                   padding: "35px",
                 }}
               >
-                <Typography variant="h6">CashKudos</Typography>
+                <Typography variant="h6">Bajaj points</Typography>
                 <Typography variant="h4" style={{ color: "#11141c" }}>
                   3000
                 </Typography>

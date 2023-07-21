@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -8,9 +8,7 @@ import { categories } from "../data/categories";
 import ProductCard from "../components/productUi/productCard";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import RecommendProducts from "../components/recommend/recommendProducts";
 import axios from "axios";
-import Calendar from "../components/events/Calendar";
 
 const CategoriesNavbar = ({ activeTab, handleTabChange, allTabs }) => {
   return (

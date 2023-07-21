@@ -1,7 +1,6 @@
 import React from "react";
-import { Box, Divider, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import CircularBar from "./CircularBar";
-import { FiInfo } from "react-icons/fi";
 
 const AveargeTotals = () => {
   return (
@@ -66,17 +65,6 @@ const AveargeTotals = () => {
             </Typography>
           </Box>
         </Box>
-      </Box>
-      <Divider />
-      <Box sx={{ display: "flex", gap: 2, pt: 2 }}>
-        <Box>
-          <FiInfo />
-        </Box>
-        <Typography variant="subtitle2" sx={{ opacity: 0.8 }}>
-          Note: Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-          aliquam quos minima, aperiam iste doloremque quis reprehenderit ad
-          placeat beatae veniam natus tempore quod a?
-        </Typography>
       </Box>
     </Paper>
   );
