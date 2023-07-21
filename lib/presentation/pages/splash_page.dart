@@ -1,3 +1,4 @@
+import 'package:financeguru/presentation/widgets/navbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:financeguru/common/gap.dart';
 import 'package:financeguru/presentation/pages/home_page.dart';
@@ -20,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
     if (GetStorage().read('token') == null) {
       Navigator.pushReplacementNamed(context, SigninPage.routeName);
     } else {
-      Navigator.pushReplacementNamed(context, HomePage.routeName);
+      Navigator.pushReplacementNamed(context, NavigationBarWidget.routeName);
     }
   }
 

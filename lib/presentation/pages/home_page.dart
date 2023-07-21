@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:financeguru/common/gap.dart';
 import 'package:financeguru/common/skeleton.dart';
@@ -12,6 +15,7 @@ import 'package:financeguru/style/typography.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:skeletons/skeletons.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,9 +29,19 @@ class _HomePageState extends State<HomePage> {
   bool _isLoad = true;
   bool _isHidden = true;
   bool _isMore = true;
+  late String balance;
+  late String accountType;
+
 
   void isLoadingSuccess() {
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 3), () async {
+      String token = GetStorage().read('token');
+
+      final res = await http.get(Uri.parse('https://eaf4-103-149-94-226.ngrok-free.app/api/bank/account/'),
+          headers: {"Authorization": "Bearer $token"});
+      final jsonData = jsonDecode(res.body);
+      print(jsonData);
+      
       setState(() {
         _isLoad = false;
       });
@@ -632,7 +646,6 @@ class _HomePageState extends State<HomePage> {
             },
             child: Row(
               children: [
-                
                 Text(
                   "Make Payment",
                   style: poppinsCaption.copyWith(color: textColor.withOpacity(.75), fontSize: 15.0),
@@ -749,7 +762,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: [
                 Text(
-                  _isHidden ? '\$550,752,210' : '---------',
+                  _isHidden ? '\₹550,752,210' : '---------',
                   style: poppinsH1.copyWith(
                     color: buttonColor,
                     fontWeight: FontWeight.w600,
@@ -990,13 +1003,13 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Good Evening!',
+                'Good Morning!',
                 style: poppinsBody2.copyWith(
                   color: textColor.withOpacity(.75),
                 ),
               ),
               Text(
-                'Listyo Adi Pamungkas🎆',
+                '${GetStorage().read('username')}  🎆',
                 style: poppinsBody1.copyWith(
                   color: textColor,
                   fontWeight: FontWeight.w600,

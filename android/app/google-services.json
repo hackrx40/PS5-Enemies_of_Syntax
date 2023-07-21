@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1046319888227",
+    "project_id": "hackrx-393212",
+    "storage_bucket": "hackrx-393212.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046319888227:android:3f16d63f80f665e3c78556",
+        "android_client_info": {
+          "package_name": "com.example.financeguru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1046319888227-dadvpv136dhbb1048l1haut72tsdjvrd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5X8dIarN5D52Ys-i_wHXNYMjH9Sqkk3E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1046319888227-dadvpv136dhbb1048l1haut72tsdjvrd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

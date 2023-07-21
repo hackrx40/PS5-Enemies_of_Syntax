@@ -27,7 +27,7 @@ class TransactionModel {
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) => TransactionModel(
         name: json["category"],
-        photoUrl: json["bill_img"],
+        photoUrl: json["bill_img"] ?? "https://storage.googleapis.com/hackrx/userData/sample.jpg",
         status: json["transaction_type"] == "DEB" ? false : true,
         dateTransfer: json["timestamp"].toString().substring(0, 10),
         timeTransfer: json["timestamp"].toString().substring(11, 16),

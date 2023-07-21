@@ -10,7 +10,7 @@ class AuthController {
     String username,
     String password,
   ) async {
-    Uri uri = Uri.parse('https://hackrx4prod-r677breg7a-uc.a.run.app//api/accounts/login/');
+    Uri uri = Uri.parse('https://eaf4-103-149-94-226.ngrok-free.app/api/accounts/login/');
     final res = await http.post(uri,
         body: jsonEncode({
           "username": username.toString(),
@@ -40,7 +40,7 @@ class AuthController {
     String phoneNumber,
   ) async {
     print(phoneNumber);
-    Uri uri = Uri.parse('https://hackrx4prod-r677breg7a-uc.a.run.app/api/accounts/signup/');
+    Uri uri = Uri.parse('https://eaf4-103-149-94-226.ngrok-free.app/api/accounts/signup/');
     final res = await http.post(uri,
         body: jsonEncode({
           "email": email.toString(),
@@ -87,7 +87,8 @@ class AuthController {
     try {
       final box = GetStorage();
       box.write('token', res['access']);
-      // box.write('id', res['user_id']);
+      box.write('acc_id', res['account_id']);
+      box.write('username', res['username']);
     } catch (e) {
       print(e);
     }

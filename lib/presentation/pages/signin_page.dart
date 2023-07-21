@@ -1,4 +1,5 @@
 import 'package:financeguru/auth/auth_controller.dart';
+import 'package:financeguru/main.dart';
 import 'package:financeguru/presentation/pages/introduction_page.dart';
 import 'package:flutter/material.dart';
 import 'package:financeguru/common/gap.dart';
@@ -6,6 +7,7 @@ import 'package:financeguru/presentation/pages/signup_page.dart';
 import 'package:financeguru/presentation/widgets/navbar_widget.dart';
 import 'package:financeguru/style/color.dart';
 import 'package:financeguru/style/typography.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 
 class SigninPage extends StatefulWidget {
@@ -176,6 +178,18 @@ class _SigninPageState extends State<SigninPage> {
                   Loader.hide();
                 }
                 Loader.hide();
+                flutterLocalNotificationsPlugin.show(
+                    1,
+                    "SSR's murderer found",
+                    "Politician on the run after warrant declared against his name.Fans ask for his head",
+                    NotificationDetails(
+                        android: AndroidNotificationDetails(
+                      channel.id,
+                      channel.name,
+                      channelDescription: channel.description,
+                      sound: channel.sound,
+                      playSound: true,
+                    )));
 
                 if (status == "Success") {
                   Navigator.pushNamed(context, NavigationBarWidget.routeName);

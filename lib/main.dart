@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:financeguru/presentation/pages/history_page.dart';
 import 'package:financeguru/presentation/pages/home_page.dart';
@@ -10,10 +11,33 @@ import 'package:financeguru/presentation/pages/signup_page.dart';
 import 'package:financeguru/presentation/pages/splash_page.dart';
 import 'package:financeguru/presentation/widgets/navbar_widget.dart';
 import 'package:financeguru/style/color.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true);
+  await GetStorage.init();
   runApp(const MyApp());
 }
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high importance channel', 'High Importance Notifications',
+    description: 'This channel is used for important Notifications', importance: Importance.high);
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+InitializationSettings initializationSettings = InitializationSettings(android: AndroidInitializationSettings('logo'));
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

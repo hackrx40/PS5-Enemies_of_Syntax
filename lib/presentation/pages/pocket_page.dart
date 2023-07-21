@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:financeguru/common/function/card_number_gap.dart';
 import 'package:financeguru/common/gap.dart';
@@ -6,8 +8,10 @@ import 'package:financeguru/common/static.dart';
 import 'package:financeguru/data/repository/repository.dart';
 import 'package:financeguru/style/color.dart';
 import 'package:financeguru/style/typography.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletons/skeletons.dart';
+import 'package:http/http.dart' as http;
 
 class PocketPage extends StatefulWidget {
   const PocketPage({Key? key}) : super(key: key);
@@ -22,6 +26,10 @@ class _PocketPageState extends State<PocketPage> {
   final formKey = GlobalKey<FormState>();
   TextEditingController dateInput = TextEditingController();
   TextEditingController endDateInput = TextEditingController();
+  TextEditingController nameInput = TextEditingController();
+  TextEditingController budgetLimitInput = TextEditingController();
+  TextEditingController descInput = TextEditingController();
+  TextEditingController recurrenceInput = TextEditingController();
 
   void isLoadingSuccess() {
     Future.delayed(const Duration(seconds: 5), () {
@@ -93,6 +101,7 @@ class _PocketPageState extends State<PocketPage> {
             child: Column(
               children: [
                 TextFormField(
+                  controller: nameInput,
                   // controller: usernameController,
                   decoration: InputDecoration(
                     hintText: 'Name of Budget',
@@ -177,6 +186,7 @@ class _PocketPageState extends State<PocketPage> {
                 ),
                 TextFormField(
                   // controller: usernameController,
+                  controller: budgetLimitInput,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: 'Budget Limit',
@@ -210,7 +220,7 @@ class _PocketPageState extends State<PocketPage> {
                 ),
                 TextFormField(
                   // controller: usernameController,
-                  keyboardType: TextInputType.number,
+                  controller: descInput,
                   decoration: InputDecoration(
                     hintText: 'Description',
                     hintStyle: poppinsBody1.copyWith(color: textColor.withOpacity(.5)),
@@ -243,7 +253,7 @@ class _PocketPageState extends State<PocketPage> {
                 ),
                 TextFormField(
                   // controller: usernameController,
-                  keyboardType: TextInputType.number,
+                  controller: recurrenceInput,
                   decoration: InputDecoration(
                     hintText: 'Recurrence',
                     hintStyle: poppinsBody1.copyWith(color: textColor.withOpacity(.5)),
@@ -319,6 +329,55 @@ class _PocketPageState extends State<PocketPage> {
                 //     } else {}
                 //   },
                 // ),
+
+                InkWell(
+                  onTap: () async {
+                    DateTime now = DateTime.now();
+                    String formattedTodaysDate = DateFormat('yyyy-MM-dd').format(now);
+                    print(formattedTodaysDate); //formatted date output using intl package =>  2021-03-16
+
+                    String token = GetStorage().read('token');
+
+                    Uri uri = Uri.parse("https://eaf4-103-149-94-226.ngrok-free.app/api/budget/userbudget/");
+
+                    var res = await http.post(uri,
+                        body: jsonEncode(
+                          {
+                            "account": GetStorage().read('acc_id'),
+                            "name": nameInput.text,
+                            "start_date": formattedTodaysDate,
+                            "end_date": "2023-07-28",
+                            "limit": budgetLimitInput.text,
+                            "description": descInput.text,
+                            "recurrence": recurrenceInput.text,
+                          },
+                        ),
+                        headers: {"Authorization": "Bearer $token", "Content-Type": "application/json"});
+
+                    print(res.body);
+                    print(res.statusCode);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Budget created successfully'),
+                      ),
+                    );
+                    // Navigator.pop(context);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 40),
+                    width: MediaQuery.of(context).size.width - 32,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: buttonColor,
+                    ),
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 17),
+                    child: Text(
+                      'Save',
+                      style: poppinsH4.copyWith(color: text2Color),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
