@@ -35,6 +35,7 @@ import SignInSide from "./pages/Auth/Register";
 import Admin from "./pages/Admin";
 import Otp from "./pages/Auth/Otp";
 import CashKudos from "./pages/Cashkudos/CashKudos";
+import Bot from "./pages/Bots";
 // import Landing from "./pages/Dashboard/Landing";
 
 const sideBarWidth = 250;
@@ -114,6 +115,7 @@ function App() {
             <Route path='/' element={<UserSelling/>}/>
             <Route path='/cashkudos' element={<CashKudos/>}/>
             <Route path='/profile/transactions' element={<Transactions/>}/>
+            <Route path='/virtualassistant' element={<Bot/>}/>
           </Routes>
           <Footer />
         </Box>
