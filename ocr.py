@@ -1,18 +1,28 @@
-from paddleocr import PaddleOCR
 import re
 import nltk
 from nltk.corpus import wordnet
+from google.cloud import vision
+import os
 
-ocr = PaddleOCR()
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './hackrx-393212-93ebb5994abd.json'
 
 
 def get_text_from_image(image_path):
-    img_path = image_path
-    result = ocr.ocr(img_path)
+    client = vision.ImageAnnotatorClient()
 
-    concat_output = "\n".join(row[1][0] for row in result[0])
+    with open(image_path, "rb") as image_file:
+        content = image_file.read()
 
-    return concat_output
+    image = vision.Image(content=content)
+
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+    all_text = ''
+
+    for text in texts:
+        all_text += text.description
+
+    return all_text
 
 
 def get_details(concat_output):
@@ -22,20 +32,20 @@ def get_details(concat_output):
     reciever = ""
     total_bill = 0
 
-    bill_date = bill_date.join(match)
+    bill_date = bill_date.join(match[0])
 
     sent_tokens = nltk.sent_tokenize(concat_output)
     reciever = sent_tokens[0].splitlines()[0]
 
     price = re.findall(r'[\$\$\£\€\₹](\d+(?:\.\d{1,2})?)', concat_output)
-    price = list(map(float, price))
-    total_bill = max(price)
+    if price:
+        price = list(map(float, price))
+        total_bill = max(price)
 
     return reciever, bill_date, total_bill
 
 
 def process_text(concat_output):
-    # we will remove punctuation
     tokenizer = nltk.RegexpTokenizer(r"\w+")
     new_words = tokenizer.tokenize(concat_output)
 
@@ -48,26 +58,22 @@ def process_text(concat_output):
 
 
 def get_category(filtered_list):
-    # entertainment
     entertainment = []
     for syn in wordnet.synsets("entertainment"):
         for l in syn.lemmas():
             entertainment.append(l.name())
 
     l = ['happy', 'restaurant', 'food', 'kitchen', 'hotel',
-         'room', 'park', 'movie', 'cinema', 'popcorn', 'combo meal']
+         'room', 'park', 'movie', 'cinema', 'popcorn', 'combo', 'meal']
     entertainment = entertainment+l
 
-    # home utility
     home_utility = []
     for syn in wordnet.synsets("home"):
         for l in syn.lemmas():
             home_utility.append(l.name())
-    l2 = ['internet', 'telephone', 'elecricity', 'meter', 'wifi', 'broadband',
-          'consumer', 'reading', 'gas', 'water', 'postpaid', 'prepaid']
+    l2 = ['internet', 'rent', 'telephone', 'elecricity', 'meter', 'wifi', 'broadband',
+          'consumer', 'reading', 'gas', 'water', 'postpaid', 'prepaid', 'airtel', 'jio']
     home_utility += l2
-
-    # grocery
 
     grocery = []
     for syn in wordnet.synsets("grocery"):
@@ -77,32 +83,37 @@ def get_category(filtered_list):
           'oil', 'bread', 'vegetabe', 'fruit', 'salt', 'paneer']
     grocery += l3
 
-    # investment
     investment = []
     for syn in wordnet.synsets("investment"):
         for l in syn.lemmas():
             investment.append(l.name())
-    l1 = ['endowment', 'grant', 'loan', 'applicant', 'income', 'expenditure', 'profit',
+    l1 = ['mutual', 'funds', 'endowment', 'grant', 'loan', 'applicant', 'income', 'expenditure', 'profit',
           'interest', 'expense', 'finance', 'property', 'money', 'fixed', 'deposit', 'kissan', 'vikas']
     investment = investment+l1
 
-    #travel and transportation
     transport = []
     for syn in wordnet.synsets("car"):
         for l in syn.lemmas():
             transport.append(l.name())
     l4 = ['cab', 'ola', 'uber', 'autorickshaw', 'railway', 'air',
-          'emirates', 'aerofloat', 'taxi', 'booking', 'road', 'highway']
+          'emirates', 'aerofloat', 'taxi', 'booking', 'road', 'highway', 'petroleum', 'diesel', 'petrol', 'gas', 'fuel']
     transport += l4
 
-    # shopping
     shopping = []
     for syn in wordnet.synsets("dress"):
         for l in syn.lemmas():
             shopping.append(l.name())
-    l4 = ['iphone', 'laptop', 'saree', 'max', 'pantaloons', 'westside', 'vedic', 'makeup',
+    l4 = ['amazon', 'myntra', 'flipkart', 'iphone', 'laptop', 'saree', 'max', 'pantaloons', 'westside', 'vedic', 'makeup',
           'lipstick', 'cosmetics', 'mac', 'facewash', 'heels', 'crocs', 'footwear', 'purse']
     shopping += l4
+
+    bank_transfers = []
+    for syn in wordnet.synsets("bank transfers"):
+        for l in syn.lemmas():
+            bank_transfers.append(l.name())
+
+    l = ['icici', 'hdfc', 'yesbank', 'bajaj']
+    bank_transfers = bank_transfers+l
 
     category = 'others'
     for word in filtered_list:
@@ -152,7 +163,7 @@ def get_gov_doc(image_path):
     return dob, number
 
 
-reciever, bill_date, total_bill, category = get_bill_details('test.png')
+reciever, bill_date, total_bill, category = get_bill_details('guj.png')
 dob, number = get_gov_doc('doc.jpg')
-# print(reciever, bill_date, total_bill, category)
-# print(dob, number)
+print(reciever, bill_date, total_bill, category)
+print(dob, number)

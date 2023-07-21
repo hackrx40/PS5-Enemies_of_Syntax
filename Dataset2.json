@@ -1,0 +1,654 @@
+{
+  "FinancialSummary": [
+    {
+      "Profile": {
+        "Holders": {
+          "Holder": {
+            "name": "fName mName lName",
+            "dob": "1966-06-08",
+            "mobile": "1149144647",
+            "nominee": "NOT-REGISTERED",
+            "landline": "",
+            "address": "Senapati Bapat Road,Pune,Maharashtra,India,411016",
+            "email": "info@cookiejar.co.in",
+            "pan": "AAAPA2433A",
+            "ckycCompliance": false
+          },
+          "type": "SINGLE"
+        }
+      },
+      "Summary": {
+        "Pending": {
+          "amount": 20
+        },
+        "currentBalance": "92720.00",
+        "currency": "INR",
+        "exchgeRate": "",
+        "balanceDateTime": "2023-06-01T00:00:00.000+00:00",
+        "type": "CURRENT",
+        "branch": "SB Road Pune [SB]",
+        "facility": "OD",
+        "ifscCode": "SBP0000136",
+        "micrCode": "",
+        "openingDate": "2017-05-05",
+        "currentODLimit": "2500000.0000",
+        "drawingLimit": "2500000.0000",
+        "status": "ACTIVE"
+      },
+      "Transactions": {
+        "Transaction": [
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 30000,
+            "currentBalance": "100000.00",
+            "transactionTimestamp": "2023-01-01T00:00:00.000+00:00",
+            "valueDate": "2023-01-01",
+            "txnId": "txnid0000001",
+            "narration": "NEFT/SBIN322147057322/EMPLOYEE SALARY ",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 4000,
+            "currentBalance": "96000.00",
+            "transactionTimestamp": "2023-01-03T00:00:00.000+00:00",
+            "valueDate": "2023-01-03",
+            "txnId": "txnid0000002",
+            "narration": "UPI/122609308010/From:7044223776@ybl/To:MYNTRA@ybl/ Payment for 7eff99fa66c0483184a1c0052342e624",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "UPI",
+            "amount": 100,
+            "currentBalance": "96100.00",
+            "transactionTimestamp": "2023-01-03T00:00:00.000+00:00",
+            "valueDate": "2023-01-03",
+            "txnId": "txnid0000003",
+            "narration": "UPI/122609308010/From:7044223776@ybl/To:MYNTRA@ybl/ Payment for 7eff99fa66c0483184a1c0052342e624",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 2500,
+            "currentBalance": "93600.00",
+            "transactionTimestamp": "2023-01-05T00:00:00.000+00:00",
+            "valueDate": "2023-01-05",
+            "txnId": "txnid0000004",
+            "narration": "PCD/536799XXXXXX7446/POLICYBAZAAR",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 250,
+            "currentBalance": "93350.00",
+            "transactionTimestamp": "2023-01-07T00:00:00.000+00:00",
+            "valueDate": "2023-01-07",
+            "txnId": "txnid0000005",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 500,
+            "currentBalance": "92850.00",
+            "transactionTimestamp": "2023-01-07T00:00:00.000+00:00",
+            "valueDate": "2023-01-07",
+            "txnId": "txnid0000006",
+            "narration": "PCD/536799XXXXXX7446/HP PETROLEUM",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 2500,
+            "currentBalance": "90350.00",
+            "transactionTimestamp": "2023-01-08T00:00:00.000+00:00",
+            "valueDate": "2023-01-08",
+            "txnId": "txnid0000007",
+            "narration": "UPI/515429XXXXXX7446/MutualFunds",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 150,
+            "currentBalance": "90200.00",
+            "transactionTimestamp": "2023-01-12T00:00:00.000+00:00",
+            "valueDate": "2023-01-12",
+            "txnId": "txnid0000008",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 8000,
+            "currentBalance": "82200.00",
+            "transactionTimestamp": "2023-01-15T00:00:00.000+00:00",
+            "valueDate": "2023-01-15",
+            "txnId": "txnid0000009",
+            "narration": "UPI/231948XXXXXX7446/Rent",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 1000,
+            "currentBalance": "81200.00",
+            "transactionTimestamp": "2023-01-19T00:00:00.000+00:00",
+            "valueDate": "2023-01-19",
+            "txnId": "txnid0000010",
+            "narration": "UPI/218128539608/Electricity/tpslqr@MSEB",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 1500,
+            "currentBalance": "79700.00",
+            "transactionTimestamp": "2023-01-24T00:00:00.000+00:00",
+            "valueDate": "2023-01-24",
+            "txnId": "txnid0000011",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "UPI",
+            "amount": 300,
+            "currentBalance": "80000.00",
+            "transactionTimestamp": "2023-01-26T00:00:00.000+00:00",
+            "valueDate": "2023-01-26",
+            "txnId": "txnid0000012",
+            "narration": "UPI/218128539608/Received from 9546215863@ybl",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "UPI",
+            "amount": 500,
+            "currentBalance": "80500.00",
+            "transactionTimestamp": "2023-01-27T00:00:00.000+00:00",
+            "valueDate": "2023-01-27",
+            "txnId": "txnid0000013",
+            "narration": "UPI/218128539608/Received from 9881425632@oksbi/GooglePay",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 30000,
+            "currentBalance": "110500.00",
+            "transactionTimestamp": "2023-02-01T00:00:00.000+00:00",
+            "valueDate": "2023-02-01",
+            "txnId": "txnid0000014",
+            "narration": "NEFT/SBIN322147057322/EMPLOYEE SALARY ",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 150,
+            "currentBalance": "110350.00",
+            "transactionTimestamp": "2023-02-02T00:00:00.000+00:00",
+            "valueDate": "2023-02-02",
+            "txnId": "txnid0000015",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 2500,
+            "currentBalance": "107850.00",
+            "transactionTimestamp": "2023-02-05T00:00:00.000+00:00",
+            "valueDate": "2023-02-05",
+            "txnId": "txnid0000016",
+            "narration": "PCD/536799XXXXXX7446/POLICYBAZAAR",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 2500,
+            "currentBalance": "105350.00",
+            "transactionTimestamp": "2023-02-08T00:00:00.000+00:00",
+            "valueDate": "2023-02-08",
+            "txnId": "txnid0000017",
+            "narration": "UPI/515429XXXXXX7446/MutualFunds",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 500,
+            "currentBalance": "104850.00",
+            "transactionTimestamp": "2023-02-10T00:00:00.000+00:00",
+            "valueDate": "2023-02-10",
+            "txnId": "txnid0000018",
+            "narration": "PCD/536799XXXXXX7446/HP PETROLEUM",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 1500,
+            "currentBalance": "103350.00",
+            "transactionTimestamp": "2023-02-13T00:00:00.000+00:00",
+            "valueDate": "2023-02-13",
+            "txnId": "txnid0000019",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 8000,
+            "currentBalance": "95350.00",
+            "transactionTimestamp": "2023-02-15T00:00:00.000+00:00",
+            "valueDate": "2023-02-15",
+            "txnId": "txnid0000020",
+            "narration": "UPI/231948XXXXXX7446/Rent",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 1200,
+            "currentBalance": "94150.00",
+            "transactionTimestamp": "2023-02-19T00:00:00.000+00:00",
+            "valueDate": "2023-02-19",
+            "txnId": "txnid0000021",
+            "narration": "UPI/218128539608/Electricity/tpslqr@MSEB",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 30000,
+            "currentBalance": "94150.00",
+            "transactionTimestamp": "2023-02-22T00:00:00.000+00:00",
+            "valueDate": "2023-02-22",
+            "txnId": "txnid0000022",
+            "narration": "Check to Mr. XYZ",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 30000,
+            "currentBalance": "94150.00",
+            "transactionTimestamp": "2023-02-25T00:00:00.000+00:00",
+            "valueDate": "2023-02-25",
+            "txnId": "txnid0000023",
+            "narration": "I/W CHQ RTN:38:AMOUNT / NAME DIFFER ON ADVICE",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 700,
+            "currentBalance": "93450.00",
+            "transactionTimestamp": "2023-02-27T00:00:00.000+00:00",
+            "valueDate": "2023-02-27",
+            "txnId": "txnid0000024",
+            "narration": "PCD/536799XXXXXX7446/HP PETROLEUM",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 30000,
+            "currentBalance": "123450.00",
+            "transactionTimestamp": "2023-03-01T00:00:00.000+00:00",
+            "valueDate": "2023-03-01",
+            "txnId": "txnid0000025",
+            "narration": "NEFT/SBIN322147057322/EMPLOYEE SALARY ",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "ATM",
+            "amount": 5000,
+            "currentBalance": "118450.00",
+            "transactionTimestamp": "2023-03-01T00:00:00.000+00:00",
+            "valueDate": "2023-03-01",
+            "txnId": "txnid0000026",
+            "narration": "ATW/536799XXXXXX7446/IDBI JALNA RD VIDY NGR AURAGA",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 2500,
+            "currentBalance": "115950.00",
+            "transactionTimestamp": "2023-03-05T00:00:00.000+00:00",
+            "valueDate": "2023-03-05",
+            "txnId": "txnid0000027",
+            "narration": "PCD/536799XXXXXX7446/POLICYBAZAAR",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 2500,
+            "currentBalance": "113450.00",
+            "transactionTimestamp": "2023-03-08T00:00:00.000+00:00",
+            "valueDate": "2023-03-08",
+            "txnId": "txnid0000028",
+            "narration": "UPI/515429XXXXXX7446/MutualFunds",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 500,
+            "currentBalance": "112950.00",
+            "transactionTimestamp": "2023-03-10T00:00:00.000+00:00",
+            "valueDate": "2023-03-10",
+            "txnId": "txnid0000029",
+            "narration": "PCD/536799XXXXXX7446/HP PETROLEUM",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 400,
+            "currentBalance": "112550.00",
+            "transactionTimestamp": "2023-03-12T00:00:00.000+00:00",
+            "valueDate": "2023-03-12",
+            "txnId": "txnid0000030",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 8000,
+            "currentBalance": "104550.00",
+            "transactionTimestamp": "2023-03-15T00:00:00.000+00:00",
+            "valueDate": "2023-03-15",
+            "txnId": "txnid0000031",
+            "narration": "UPI/231948XXXXXX7446/Rent",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 1400,
+            "currentBalance": "103150.00",
+            "transactionTimestamp": "2023-03-19T00:00:00.000+00:00",
+            "valueDate": "2023-03-19",
+            "txnId": "txnid0000032",
+            "narration": "UPI/218128539608/Electricity/tpslqr@MSEB",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 12000,
+            "currentBalance": "91150.00",
+            "transactionTimestamp": "2023-03-30T00:00:00.000+00:00",
+            "valueDate": "2023-03-30",
+            "txnId": "txnid0000033",
+            "narration": "ITR",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 30000,
+            "currentBalance": "121150.00",
+            "transactionTimestamp": "2023-04-01T00:00:00.000+00:00",
+            "valueDate": "2023-04-01",
+            "txnId": "txnid0000034",
+            "narration": "NEFT/SBIN322147057322/EMPLOYEE SALARY ",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 2500,
+            "currentBalance": "118650.00",
+            "transactionTimestamp": "2023-04-05T00:00:00.000+00:00",
+            "valueDate": "2023-04-05",
+            "txnId": "txnid0000035",
+            "narration": "PCD/536799XXXXXX7446/POLICYBAZAAR",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 500,
+            "currentBalance": "118150.00",
+            "transactionTimestamp": "2023-04-06T00:00:00.000+00:00",
+            "valueDate": "2023-04-06",
+            "txnId": "txnid0000036",
+            "narration": "PCD/536799XXXXXX7446/HP PETROLEUM",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 2500,
+            "currentBalance": "115650.00",
+            "transactionTimestamp": "2023-04-08T00:00:00.000+00:00",
+            "valueDate": "2023-04-08",
+            "txnId": "txnid0000037",
+            "narration": "UPI/515429XXXXXX7446/MutualFunds",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 80,
+            "currentBalance": "115570.00",
+            "transactionTimestamp": "2023-04-12T00:00:00.000+00:00",
+            "valueDate": "2023-04-12",
+            "txnId": "txnid0000038",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 150,
+            "currentBalance": "115720.00",
+            "transactionTimestamp": "2023-04-14T00:00:00.000+00:00",
+            "valueDate": "2023-04-14",
+            "txnId": "txnid0000039",
+            "narration": "NEFT/Dividend/Reliance ",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 8000,
+            "currentBalance": "107720.00",
+            "transactionTimestamp": "2023-04-15T00:00:00.000+00:00",
+            "valueDate": "2023-04-15",
+            "txnId": "txnid0000040",
+            "narration": "UPI/231948XXXXXX7446/Rent",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 2800,
+            "currentBalance": "104920.00",
+            "transactionTimestamp": "2023-04-18T00:00:00.000+00:00",
+            "valueDate": "2023-04-18",
+            "txnId": "txnid0000041",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 900,
+            "currentBalance": "104020.00",
+            "transactionTimestamp": "2023-04-19T00:00:00.000+00:00",
+            "valueDate": "2023-04-19",
+            "txnId": "txnid0000042",
+            "narration": "UPI/218128539608/Electricity/tpslqr@MSEB",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 29900,
+            "currentBalance": "74120.00",
+            "transactionTimestamp": "2023-04-27T00:00:00.000+00:00",
+            "valueDate": "2023-04-27",
+            "txnId": "txnid0000043",
+            "narration": "UPI/mandate for IPO",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 2100,
+            "currentBalance": "72020.00",
+            "transactionTimestamp": "2023-04-29T00:00:00.000+00:00",
+            "valueDate": "2023-04-29",
+            "txnId": "txnid0000044",
+            "narration": "UPI/122609308010/From:7044223776@ybl/To:MYNTRA@ybl/ Payment for 7eff99fa66c0483184a1c0052342e624",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 30000,
+            "currentBalance": "102020.00",
+            "transactionTimestamp": "2023-05-01T00:00:00.000+00:00",
+            "valueDate": "2023-05-01",
+            "txnId": "txnid0000045",
+            "narration": "NEFT/SBIN322147057322/EMPLOYEE SALARY ",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "ATM",
+            "amount": 10000,
+            "currentBalance": "92020.00",
+            "transactionTimestamp": "2023-05-03T00:00:00.000+00:00",
+            "valueDate": "2023-05-03",
+            "txnId": "txnid0000046",
+            "narration": "ATW/536799XXXXXX7446/HDFC ATM ",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "OTHERS",
+            "amount": 2500,
+            "currentBalance": "89520.00",
+            "transactionTimestamp": "2023-05-05T00:00:00.000+00:00",
+            "valueDate": "2023-05-05",
+            "txnId": "txnid0000047",
+            "narration": "PCD/536799XXXXXX7446/POLICYBAZAAR",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 3600,
+            "currentBalance": "85920.00",
+            "transactionTimestamp": "2023-05-05T00:00:00.000+00:00",
+            "valueDate": "2023-05-05",
+            "txnId": "txnid0000048",
+            "narration": "UPI/IRCTC",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 2500,
+            "currentBalance": "83420.00",
+            "transactionTimestamp": "2023-05-08T00:00:00.000+00:00",
+            "valueDate": "2023-05-08",
+            "txnId": "txnid0000049",
+            "narration": "UPI/515429XXXXXX7446/MutualFunds",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "ATM",
+            "amount": 10000,
+            "currentBalance": "73420.00",
+            "transactionTimestamp": "2023-05-13T00:00:00.000+00:00",
+            "valueDate": "2023-05-13",
+            "txnId": "txnid0000050",
+            "narration": "ATW/536799XXXXXX7446/HDFC ATM ",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 8000,
+            "currentBalance": "65420.00",
+            "transactionTimestamp": "2023-05-15T00:00:00.000+00:00",
+            "valueDate": "2023-05-15",
+            "txnId": "txnid0000051",
+            "narration": "UPI/231948XXXXXX7446/Rent",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 800,
+            "currentBalance": "64620.00",
+            "transactionTimestamp": "2023-05-19T00:00:00.000+00:00",
+            "valueDate": "2023-05-19",
+            "txnId": "txnid0000052",
+            "narration": "UPI/218128539608/Electricity/tpslqr@MSEB",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 1300,
+            "currentBalance": "63320.00",
+            "transactionTimestamp": "2023-05-23T00:00:00.000+00:00",
+            "valueDate": "2023-05-23",
+            "txnId": "txnid0000053",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "DEBIT",
+            "mode": "UPI",
+            "amount": 600,
+            "currentBalance": "62720.00",
+            "transactionTimestamp": "2023-05-27T00:00:00.000+00:00",
+            "valueDate": "2023-05-27",
+            "txnId": "txnid0000054",
+            "narration": "UPI/218128539608/Pay to BharatPe Merchant/BHARATPE",
+            "reference": ""
+          },
+          {
+            "type": "CREDIT",
+            "mode": "OTHERS",
+            "amount": 30000,
+            "currentBalance": "92720.00",
+            "transactionTimestamp": "2023-06-01T00:00:00.000+00:00",
+            "valueDate": "2023-06-01",
+            "txnId": "txnid0000055",
+            "narration": "NEFT/SBIN322147057322/EMPLOYEE SALARY ",
+            "reference": ""
+          }
+        ],
+        "startDate": "2022-11-14",
+        "endDate": "2023-11-14"
+      },
+      "type": "deposit",
+      "maskedAccNumber": "XXXXX7202",
+      "version": "1.1"
+    }
+  ]
+}
