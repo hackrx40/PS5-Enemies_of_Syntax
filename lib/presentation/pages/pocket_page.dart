@@ -6,6 +6,7 @@ import 'package:financeguru/common/static.dart';
 import 'package:financeguru/data/repository/repository.dart';
 import 'package:financeguru/style/color.dart';
 import 'package:financeguru/style/typography.dart';
+import 'package:intl/intl.dart';
 import 'package:skeletons/skeletons.dart';
 
 class PocketPage extends StatefulWidget {
@@ -18,6 +19,9 @@ class PocketPage extends StatefulWidget {
 
 class _PocketPageState extends State<PocketPage> {
   bool _isLoad = true;
+  final formKey = GlobalKey<FormState>();
+  TextEditingController dateInput = TextEditingController();
+  TextEditingController endDateInput = TextEditingController();
 
   void isLoadingSuccess() {
     Future.delayed(const Duration(seconds: 5), () {
@@ -47,9 +51,9 @@ class _PocketPageState extends State<PocketPage> {
               children: [
                 headerSection(),
                 const VerticalGap10(),
-                cardListSection(context),
+                // cardListSection(context),
                 const VerticalGap10(),
-                balanceSection(context),
+                // balanceSection(context),
                 const VerticalGap10(),
                 pocketSection(context),
               ],
@@ -65,112 +69,259 @@ class _PocketPageState extends State<PocketPage> {
       duration: const Duration(seconds: 2),
       isLoading: _isLoad,
       themeMode: ThemeMode.dark,
-      darkShimmerGradient: LinearGradient(
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
-        colors: [
-          secondaryColor,
-          secondaryColor.withOpacity(.75),
-          secondaryColor,
-        ],
-        tileMode: TileMode.repeated,
-      ),
+      // darkShimmerGradient: LinearGradient(
+      //   begin: Alignment.centerLeft,
+      //   end: Alignment.centerRight,
+      //   colors: [
+      //     secondaryColor,
+      //     secondaryColor.withOpacity(.75),
+      //     secondaryColor,
+      //   ],
+      //   tileMode: TileMode.repeated,
+      // ),
       skeleton: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: const GridViewSkeleton(),
       ),
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height / 2,
+        // height: MediaQuery.of(context).size.height / 2,
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: FutureBuilder(
-          future: Repository().getPocket(),
-          builder: (context, snapshot) {
-            return GridView.builder(
-              padding: const EdgeInsets.only(bottom: 24),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
-              itemCount: snapshot.data?.length ?? 0,
-              itemBuilder: (context, index) {
-                final data = snapshot.data![index];
-                return InkWell(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: data.typePocket == 3
-                          ? Colors.blue.shade800
-                          : (data.typePocket == 2 ? Colors.green.shade700 : secondaryColor),
-                      borderRadius: BorderRadius.circular(16),
+        child: Container(
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  // controller: usernameController,
+                  decoration: InputDecoration(
+                    hintText: 'Name of Budget',
+                    hintStyle: poppinsBody1.copyWith(color: textColor.withOpacity(.5)),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
                     ),
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              color: data.typePocket == 3
-                                  ? Colors.blue.shade900
-                                  : (data.typePocket == 2 ? Colors.green.shade900 : primaryColor),
-                            ),
-                            padding: const EdgeInsets.all(8),
-                            child: data.typePocket == 3 || data.typePocket == 2
-                                ? Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(40),
-                                        image: DecorationImage(
-                                          image: data.typePocket == 3
-                                              ? const AssetImage('assets/images/gopay.jpg')
-                                              : const AssetImage('assets/images/bibit.jpg'),
-                                          fit: BoxFit.cover,
-                                        )),
-                                  )
-                                : const Icon(
-                                    Icons.account_balance_wallet_rounded,
-                                    color: Colors.white,
-                                    size: 40,
-                                  )),
-                        const VerticalGap5(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              data.pocket,
-                              style: poppinsBody2.copyWith(
-                                color: data.typePocket == 3 || data.typePocket == 2
-                                    ? Colors.white
-                                    : textColor.withOpacity(.75),
-                              ),
-                            ),
-                            Text(
-                              '\$ ${data.totalMoney}',
-                              style: poppinsH2.copyWith(
-                                color: data.typePocket == 3 || data.typePocket == 2 ? Colors.white : buttonColor,
-                              ),
-                            ),
-                            Text(
-                              data.typePocket == 3 ? 'Gopay' : (data.typePocket == 2 ? 'Bibit' : 'Pocket'),
-                              style: poppinsCaption.copyWith(
-                                color: textColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: textColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: buttonColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
                     ),
                   ),
-                );
-              },
-            );
-          },
+                  style: poppinsBody1.copyWith(color: textColor),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  style: poppinsBody1.copyWith(color: textColor),
+                  controller: dateInput,
+                  //editing controller of this TextField
+                  decoration: InputDecoration(
+                    hintText: 'End date of budget',
+                    hintStyle: poppinsBody1.copyWith(color: textColor.withOpacity(.5)),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: textColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: buttonColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    suffixIcon: Icon(
+                      Icons.calendar_today,
+                      color: textColor.withOpacity(.5),
+                    ), //icon of text field
+                  ),
+                  readOnly: true,
+                  //set it true, so that user will not able to edit text
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1950),
+                        //DateTime.now() - not to allow to choose before today.
+                        lastDate: DateTime(2100));
+
+                    if (pickedDate != null) {
+                      print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                      setState(() {
+                        dateInput.text = formattedDate; //set output date to TextField value.
+                      });
+                    } else {}
+                  },
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  // controller: usernameController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Budget Limit',
+                    hintStyle: poppinsBody1.copyWith(color: textColor.withOpacity(.5)),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: textColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: buttonColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                  ),
+                  style: poppinsBody1.copyWith(color: textColor),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  // controller: usernameController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Description',
+                    hintStyle: poppinsBody1.copyWith(color: textColor.withOpacity(.5)),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: textColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: buttonColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                  ),
+                  style: poppinsBody1.copyWith(color: textColor),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  // controller: usernameController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Recurrence',
+                    hintStyle: poppinsBody1.copyWith(color: textColor.withOpacity(.5)),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: textColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: buttonColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                  ),
+                  style: poppinsBody1.copyWith(color: textColor),
+                ),
+                // TextFormField(
+                //   style: poppinsBody1.copyWith(color: textColor),
+                //   controller: endDateInput,
+                //   //editing controller of this TextField
+                //   decoration: InputDecoration(
+                //     hintText: 'Date of birth',
+                //     hintStyle: poppinsBody1.copyWith(color: textColor.withOpacity(.5)),
+                //     enabledBorder: const OutlineInputBorder(
+                //       borderSide: BorderSide(
+                //         color: textColor,
+                //       ),
+                //       borderRadius: BorderRadius.all(
+                //         Radius.circular(16),
+                //       ),
+                //     ),
+                //     focusedBorder: const OutlineInputBorder(
+                //       borderSide: BorderSide(
+                //         color: buttonColor,
+                //       ),
+                //       borderRadius: BorderRadius.all(
+                //         Radius.circular(16),
+                //       ),
+                //     ),
+                //     suffixIcon: Icon(
+                //       Icons.calendar_today,
+                //       color: textColor.withOpacity(.5),
+                //     ), //icon of text field
+                //   ),
+                //   readOnly: true,
+                //   //set it true, so that user will not able to edit text
+                //   onTap: () async {
+                //     DateTime? pickedDate = await showDatePicker(
+                //         context: context,
+                //         initialDate: DateTime.now(),
+                //         firstDate: DateTime(1950),
+                //         //DateTime.now() - not to allow to choose before today.
+                //         lastDate: DateTime(2100));
+
+                //     if (pickedDate != null) {
+                //       print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                //       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                //       print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                //       setState(() {
+                //         endDateInput.text = formattedDate; //set output date to TextField value.
+                //       });
+                //     } else {}
+                //   },
+                // ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -562,7 +713,7 @@ class _PocketPageState extends State<PocketPage> {
           ),
           const HorizontalGap5(),
           Text(
-            'My Pockets',
+            'Set Budgets',
             style: poppinsH1.copyWith(color: textColor),
           ),
         ],

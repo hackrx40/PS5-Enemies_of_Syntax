@@ -86,7 +86,7 @@ class AuthController {
   void init(res) async {
     try {
       final box = GetStorage();
-      box.write('token', res['token']);
+      box.write('token', res['access']);
       // box.write('id', res['user_id']);
     } catch (e) {
       print(e);

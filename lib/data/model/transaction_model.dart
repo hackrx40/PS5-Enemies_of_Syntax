@@ -15,14 +15,23 @@ class TransactionModel {
     required this.totalMoney,
   });
 
-  factory TransactionModel.fromJson(Map<String, dynamic> json) =>
-      TransactionModel(
-        name: json["name"],
-        photoUrl: json["photoURL"],
-        status: json["status"],
-        dateTransfer: json["dateTransfer"],
-        timeTransfer: json["timeTransfer"],
-        totalMoney: json["totalMoney"]?.toDouble(),
+  // factory TransactionModel.fromJson(Map<String, dynamic> json) =>
+  //     TransactionModel(
+  //       name: json["name"],
+  //       photoUrl: json["photoURL"],
+  //       status: json["status"],
+  //       dateTransfer: json["dateTransfer"],
+  //       timeTransfer: json["timeTransfer"],
+  //       totalMoney: json["totalMoney"]?.toDouble(),
+  //     );
+
+  factory TransactionModel.fromJson(Map<String, dynamic> json) => TransactionModel(
+        name: json["category"],
+        photoUrl: json["bill_img"],
+        status: json["transaction_type"] == "DEB" ? false : true,
+        dateTransfer: json["timestamp"].toString().substring(0, 10),
+        timeTransfer: json["timestamp"].toString().substring(11, 16),
+        totalMoney: double.parse(json["amount"]),
       );
 
   Map<String, dynamic> toJson() => {
