@@ -86,17 +86,29 @@ const data =
 
 
 const Coupons = () => {
-    const CouponLayout = ({ title, description, discount, value }) => {
+    const CouponLayout = ({ title, description, discount, valid_until, value }) => {
         return (
             <Container>
                 <div className='coupon-card'>
-                    <img width="100" src="https://static.vecteezy.com/system/resources/previews/008/470/225/original/heart-anime-cute-character-cartoon-model-emotion-illustration-clipart-drawing-kawaii-manga-design-idea-art-free-png.png" className='logo' />
-                    <h3>10% off on all orders</h3>
-                    <p>Valid till : 20 dec , 2021</p>
+                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+                        <div style={{ textAlign: "left" }}>
+                            <Typography sx={{ fontSize: "1.2rem" }} component="div">
+                                {discount}% OFF
+                            </Typography>
+                            <b>Category</b> <br />
+                            <span> {description} </span>
+                        </div>
+                        <div>
+                            <Typography sx={{ color: "green", fontWeight: "600" }} variant="h5" component="div">
+                                {title}
+                            </Typography>
+                            <span style={{ fontSize: "0.7rem" }}>Valid till {valid_until}</span>
+                        </div>
+                    </div>
                     <div className='circle1'></div>
                     <div className='circle2'></div>
                 </div>
-            </Container>
+            </Container >
         );
     };
     return (
@@ -107,7 +119,7 @@ const Coupons = () => {
                     {data.coupons.map((coupon) => {
                         return (
                             <Grid item xs={12} md={6} lg={4}>
-                                <CouponLayout title={coupon.coupon_code} description={coupon.category} discount={coupon.discount_percent} value="100" />
+                                <CouponLayout title={coupon.coupon_code} description={coupon.category} discount={coupon.discount_percent} valid_until={coupon.valid_until} value="100" />
                             </Grid>
                         )
                     }

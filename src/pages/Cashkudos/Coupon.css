@@ -9,10 +9,12 @@
 }
 
 .coupon-card{
-    background: linear-gradient(135deg, #7158fe, #9d4de6);
+    background: linear-gradient(135deg, #414141, #000000);
     color: #F4F7FE;
     text-align: center;
-    padding: 40px 80px;
+    padding: 40px 20px;
+    width: 330px;
+    height:175px;
     border-radius: 15px;
     box-shadow: 0 10px 10px 0;
     position: relative;
