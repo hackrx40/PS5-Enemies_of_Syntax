@@ -4,6 +4,35 @@ import { Box, Paper, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { BsGraphUpArrow, BsGraphDownArrow } from "react-icons/bs";
 import CountUp from "react-countup";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import PropTypes from "prop-types";
+
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+CustomTabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
 
 const UserDashboardData = () => {
   const ComponentWrapper = styled(Box)({
@@ -11,27 +40,20 @@ const UserDashboardData = () => {
     paddingBottom: "10px",
   });
 
-  const [freq, setFreq] = React.useState("yearly");
-  const [freq2, setFreq2] = React.useState("yearly");
-  const [amount, setAmount] = React.useState(100000);
-  const [expense, setExpense] = React.useState(750000);
+  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event) => {
-    setFreq(event.target.value);
-    if (event.target.value === "yearly") setAmount(100000);
-    else if (event.target.value === "monthly") setAmount(5000);
-    else if (event.target.value === "weekly") setAmount(750);
+  const handleChangeTab = (event, newValue) => {
+    setValue(newValue);
   };
 
-  const handleChange2 = (event) => {
-    setFreq2(event.target.value);
-    if (event.target.value === "yearly") setExpense(750000);
-    else if (event.target.value === "monthly") setExpense(2000);
-    else if (event.target.value === "weekly") setExpense(300);
+  const [value2, setValue2] = React.useState(0);
+
+  const handleChangeTab2 = (event, newValue) => {
+    setValue2(newValue);
   };
 
   return (
-    <Box >
+    <Box>
       <ComponentWrapper>
         <Grid container spacing={1}>
           <Grid item lg={3}>
@@ -131,33 +153,43 @@ const UserDashboardData = () => {
                   height: "100%",
                   padding: "35px",
                   display: "flex",
-                  flexDirection: "row",
+                  flexDirection: "column",
                   justifyContent: "space-between",
                 }}
               >
                 <div>
                   <Typography variant="h6">Total Income</Typography>
+                </div>
+                <Tabs
+                  value={value}
+                  onChange={handleChangeTab}
+                  aria-label="basic tabs example"
+                >
+                  <Tab label="Weekly" />
+                  <Tab label="Monthly" />
+                  <Tab label="Yearly" />
+                </Tabs>
+                <CustomTabPanel value={value} index={0}>
                   <Typography variant="h4" style={{ color: "#11141c" }}>
-                    ₹ <CountUp end={amount} duration={1} />
+                    ₹ 750000
                   </Typography>
-                  <Typography>
-                    <BsGraphUpArrow
-                      style={{ color: "green", fontSize: "20px" }}
-                    />
-                    &nbsp; 18.07% Increase
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={1}>
+                  <Typography variant="h4" style={{ color: "#11141c" }}>
+                    ₹ 50000
                   </Typography>
-                </div>
-                <div>
-                  <Select
-                    label="Frequency"
-                    value={freq}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value="yearly">Yearly</MenuItem>
-                    <MenuItem value="monthly">Monthly</MenuItem>
-                    <MenuItem value="weekly">Weekly</MenuItem>
-                  </Select>
-                </div>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={2}>
+                  <Typography variant="h4" style={{ color: "#11141c" }}>
+                    ₹ 5000
+                  </Typography>
+                </CustomTabPanel>
+                <Typography>
+                  <BsGraphUpArrow
+                    style={{ color: "green", fontSize: "20px" }}
+                  />
+                  &nbsp; 18.07% Increase
+                </Typography>
               </Paper>
             </ComponentWrapper>
           </Grid>
@@ -179,26 +211,36 @@ const UserDashboardData = () => {
               >
                 <div>
                   <Typography variant="h6">Total Expenses</Typography>
-                  <Typography variant="h4" style={{ color: "#11141c" }}>
-                    ₹ <CountUp end={expense} duration={1} />
-                  </Typography>
+                  <Tabs
+                    value={value2}
+                    onChange={handleChangeTab2}
+                    aria-label="basic tabs example"
+                  >
+                    <Tab label="Weekly" />
+                    <Tab label="Monthly" />
+                    <Tab label="Yearly" />
+                  </Tabs>
+                  <CustomTabPanel value={value2} index={0}>
+                    <Typography variant="h4" style={{ color: "#11141c" }}>
+                      ₹ 100000
+                    </Typography>
+                  </CustomTabPanel>
+                  <CustomTabPanel value={value2} index={1}>
+                    <Typography variant="h4" style={{ color: "#11141c" }}>
+                      ₹ 50000
+                    </Typography>
+                  </CustomTabPanel>
+                  <CustomTabPanel value={value2} index={2}>
+                    <Typography variant="h4" style={{ color: "#11141c" }}>
+                      ₹ 5000
+                    </Typography>
+                  </CustomTabPanel>
                   <Typography>
                     <BsGraphDownArrow
                       style={{ color: "red", fontSize: "20px" }}
                     />
                     &nbsp; 20.07% Decrease
                   </Typography>
-                </div>
-                <div>
-                  <Select
-                    label="Frequency"
-                    value={freq2}
-                    onChange={handleChange2}
-                  >
-                    <MenuItem value="yearly">Yearly</MenuItem>
-                    <MenuItem value="monthly">Monthly</MenuItem>
-                    <MenuItem value="weekly">Weekly</MenuItem>
-                  </Select>
                 </div>
               </Paper>
             </ComponentWrapper>
