@@ -1,9 +1,8 @@
-import { Grid, MenuItem, Select } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { BsGraphUpArrow, BsGraphDownArrow } from "react-icons/bs";
-import CountUp from "react-countup";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import PropTypes from "prop-types";
@@ -34,6 +33,22 @@ CustomTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
+const getData = async() => {
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjAwNjU3LCJpYXQiOjE2ODk5NDE0NTcsImp0aSI6IjM4OTgzY2RiN2E4NjQ2ZDBhODI0NWYxODllNjEzMmM1IiwidXNlcl9pZCI6MX0.Y8xupTUlhL6X506p5uM0-pVeHDZdCmlhXETfqqa44ag"
+   }
+   
+   let response = await fetch("https://backend-r677breg7a-uc.a.run.app/api/bank/account/", { 
+     method: "GET",
+     headers: headersList
+   });
+   
+   let data = await response.text();
+   console.log(data);
+}
+
 const UserDashboardData = () => {
   const ComponentWrapper = styled(Box)({
     marginTop: "10px",
@@ -45,6 +60,8 @@ const UserDashboardData = () => {
   const handleChangeTab = (event, newValue) => {
     setValue(newValue);
   };
+
+  getData();
 
   const [value2, setValue2] = React.useState(0);
 

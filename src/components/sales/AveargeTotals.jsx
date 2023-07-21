@@ -15,7 +15,7 @@ const AveargeTotals = () => {
         padding: "16px",
       }}
     >
-      <Typography variant="h5">Average Total Sales</Typography>
+      <Typography variant="h5">Average Total Earnings</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
         2022-2023
       </Typography>

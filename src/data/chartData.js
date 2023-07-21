@@ -247,11 +247,11 @@ export const salesLineChartOptions = {
 
 export const dailyVisitsBarChartData = [
   {
-    name: "Mobile Browser",
+    name: "Expenditure",
     data: [44, 55, 57, 56],
   },
   {
-    name: "Desktop",
+    name: "Savings",
     data: [76, 85, 101, 98],
   },
 ];
