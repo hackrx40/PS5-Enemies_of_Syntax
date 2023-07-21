@@ -62,6 +62,7 @@ class Budget(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     limit = models.DecimalField(max_digits=10, decimal_places=2)
+    current_limit = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     description = models.TextField(blank=True, null=True)
     goal_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     goal_img = models.ImageField(blank=True, null=True, upload_to=upload_goal_img_path_handler)
@@ -86,7 +87,8 @@ class Transaction(models.Model):
         ('NEF', 'NEFT'),
         ('RTG', 'RTGS'),
         ('CRE', 'Credit Card'),
-        ('DEB', 'Debit Card')
+        ('DEB', 'Debit Card'),
+        ('OTH', 'Others')
     )
     transaction_type_choices = (
         ('DEB', 'Debit'),
@@ -141,7 +143,7 @@ def update_balance(sender, instance, **kwargs):
                 account.balance = account.balance - instance.amount
             try:
                 budget = Budget.objects.get(user=user, account=account, category=instance.category)
-                budget.limit = budget.limit - instance.amount
+                budget.current_limit = budget.current_limit - instance.amount
                 budget.save()
             except Budget.DoesNotExist as e:
                 pass
@@ -149,7 +151,7 @@ def update_balance(sender, instance, **kwargs):
             account.balance = account.balance + instance.amount
             try:
                 budget = Budget.objects.get(user=user, account=account, category=instance.category)
-                budget.limit = budget.limit + instance.amount
+                budget.current_limit = budget.current_limit + instance.amount
                 budget.save()
             except Budget.DoesNotExist as e:
                 pass

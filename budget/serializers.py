@@ -4,7 +4,7 @@ from .models import Budget, BankAccount, Transaction, OCR, Coupons
 class BudgetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Budget
-        fields = ['user', 'account', 'name', 'start_date', 'end_date', 'limit', 'description', 'goal_amount', 'goal_img', 'recurrence']
+        fields = ['user', 'account', 'name', 'start_date', 'end_date', 'limit', 'current_limit', 'description', 'goal_amount', 'goal_img', 'recurrence']
 
 class BankAccountSerializer(serializers.ModelSerializer):
     class Meta:

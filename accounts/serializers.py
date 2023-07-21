@@ -40,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'username', 'firstname', 'lastname', 'dateofbirth', 'gender', 'phonenumber', 'profilepic', 'gov_id_num', 'gov_id_img', 'card_img']
+        fields = ['email', 'username', 'firstname', 'lastname', 'dateofbirth', 'gender', 'phonenumber', 'profilepic', 'gov_id_num', 'gov_id_img', 'card_img', 'points']
 
 class VerificationSerializer(serializers.ModelSerializer):
     token = serializers.CharField(max_length=666)

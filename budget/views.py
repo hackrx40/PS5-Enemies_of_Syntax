@@ -67,8 +67,8 @@ class TransactionAPI(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Ge
                 description=request.data['description'],
                 narration=request.data['narration'],
                 initial_balance=account.balance,
-                mode=request.data['mode'],
-                bill_img=request.FILES['bill_img']
+                mode=request.data['mode']
+                # bill_img=request.FILES['bill_img']
             )
             return JsonResponse({'message': 'Transaction submitted successfully'}, status=status.HTTP_201_CREATED)
         except Exception as e:
@@ -96,6 +96,7 @@ class BudgetAPI(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
                 start_date=request.data['start_date'],
                 end_date=request.data['end_date'],
                 limit=Decimal(request.data['limit']),
+                current_limit=Decimal(request.data['limit']),
                 description=request.data['description'],
                 # goal_amount=Decimal(request.data['goal_amount']),
                 # goal_img=request.FILES['goal_img'],
