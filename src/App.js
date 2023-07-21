@@ -115,6 +115,7 @@ function App() {
             <Route path='/cashkudos' element={<CashKudos/>}/>
             <Route path='/profile/transactions' element={<Transactions/>}/>
             <Route path='/virtualassistant' element={<Bot/>}/>
+            <Route path='/goals' element={<Bot/>}/>
           </Routes>
           <Footer />
         </Box>
