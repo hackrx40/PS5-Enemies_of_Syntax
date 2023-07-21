@@ -36,7 +36,6 @@ import Admin from "./pages/Admin";
 import Otp from "./pages/Auth/Otp";
 import CashKudos from "./pages/Cashkudos/CashKudos";
 import Bot from "./pages/Bots";
-// import Landing from "./pages/Dashboard/Landing";
 
 const sideBarWidth = 250;
 

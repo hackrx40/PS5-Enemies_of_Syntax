@@ -157,7 +157,7 @@ export default function ProductCard({ data }) {
                     {data.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    {data.auctionStatus == "Upcoming" ?
+                    {data.auctionStatus === "Upcoming" ?
                         "Start data: " + startdate[2] + " " + startdate[1] + " " + startdate[3] : "End data: " + enddate[2] + " " + enddate[1] + " " + enddate[3]}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">

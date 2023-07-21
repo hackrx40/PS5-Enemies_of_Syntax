@@ -14,7 +14,7 @@ const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
         <RiAuctionLine className="text-2xl text-white" />
 
         <Typography variant="h6" sx={{ fontWeight: "bold", ml: 2 }}>
-          WinWise
+          Finance Guru
         </Typography>
       </Toolbar>
       <Divider />
@@ -36,7 +36,7 @@ const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
   const location = useLocation();
   const path = location.pathname;
   return (
-    path == '/login' || path == '/signup' || path == "/inbox" || path == "/otp" ? null :
+    path==='/login' || path==='/signup' || path==="/inbox" || path==="/otp" ? null :
       <Box
         component="nav"
         sx={{ width: { md: sideBarWidth }, flexShrink: { md: 0 } }}

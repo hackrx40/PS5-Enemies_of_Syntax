@@ -7,7 +7,7 @@ const UserSelling = () => {
   return (
     <div>
       <UserDashboardData />
-      <ProductSales />
+      {/* <ProductSales /> */}
       <SalesAnalytics />
       {/* <Reviews/> */}
     </div>

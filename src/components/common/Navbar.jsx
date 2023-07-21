@@ -9,9 +9,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BsBell } from "react-icons/bs";
-import { FiMenu, FiMoon, FiSun } from "react-icons/fi";
+import { FiMoon, FiSun } from "react-icons/fi";
 import { useColorTheme } from "../../contexts/ThemeContext";
 import ProfileMenu from "./ProfileMenu";
 import { Link, useLocation } from "react-router-dom";
@@ -48,7 +48,7 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
     setCounter(1);
   }, [counter]);
 
-  return path == "/login" || path == "/signup" || path == "/otp" ? null : (
+  return path==="/login" || path==="/signup" || path==="/otp" ? null : (
     <AppBar
       position="fixed"
       sx={{
@@ -98,7 +98,7 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
                 variant="h5"
                 sx={{ display: { xs: "none", sm: "block" } }}
               >
-                Welcome to WinWise
+                Welcome to Finance <span style={{ color: "#FDC448" }} >Guru</span> 
               </Typography>
             </Link>
           </Box>
