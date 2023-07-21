@@ -1,17 +1,25 @@
-from paddleocr import PaddleOCR
-import re
+from google.cloud import vision
+import re, os
 import nltk
 from nltk.corpus import wordnet
 
-ocr = PaddleOCR()
-
 def get_text_from_image(image_path):
-    img_path = image_path
-    result = ocr.ocr(img_path)
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'hackrx-393212-93ebb5994abd.json'
+    client = vision.ImageAnnotatorClient()
 
-    concat_output = "\n".join(row[1][0] for row in result[0])
+    with open(image_path, "rb") as image_file:
+        content = image_file.read()
 
-    return concat_output
+    image = vision.Image(content=content)
+
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+    all_text = ''
+
+    for text in texts:
+        all_text += text.description
+
+    return all_text
 
 def get_details(concat_output):
     match = re.findall(r'\d+[/.-]\d+[/.-]\d{4}', concat_output)
@@ -20,15 +28,16 @@ def get_details(concat_output):
     reciever = ""
     total_bill = 0
 
-    bill_date = bill_date.join(match)
+    bill_date = bill_date.join(match[0])
 
     sent_tokens = nltk.sent_tokenize(concat_output)
     reciever = sent_tokens[0].splitlines()[0]
 
     price = re.findall(r'[\$\$\£\€\₹](\d+(?:\.\d{1,2})?)', concat_output)
     price = list(map(float, price))
-    total_bill = max(price)
-
+    if price:
+        total_bill = max(price)
+    
     return reciever, bill_date, total_bill
 
 

@@ -1,16 +1,24 @@
-from paddleocr import PaddleOCR
 import re
-import nltk
-
-ocr = PaddleOCR()
+import nltk, os
+from google.cloud import vision
 
 def get_text_from_image(image_path):
-    img_path = image_path
-    result = ocr.ocr(img_path)
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'hackrx-393212-93ebb5994abd.json'
+    client = vision.ImageAnnotatorClient()
 
-    concat_output = "\n".join(row[1][0] for row in result[0])
+    with open(image_path, "rb") as image_file:
+        content = image_file.read()
 
-    return concat_output
+    image = vision.Image(content=content)
+
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+    all_text = ''
+
+    for text in texts:
+        all_text += text.description
+
+    return all_text
 
 def get_gov_doc(image_path):
     text = get_text_from_image(image_path)

@@ -102,7 +102,8 @@ class Transaction(models.Model):
     narration = models.TextField(blank=True, null=True)
     initial_balance = models.DecimalField(max_digits=10, decimal_places=2)
     mode = models.CharField(max_length=3, choices=transaction_mode_choices, default='UPI')
-    
+    bill_img = models.ImageField(blank=True, null=True, upload_to=upload_bill_img_path_handler)
+
     def __str__(self):
         return self.user.firstname + ' - ' + self.account.ifsc + ' - ' + self.transaction_type + ' - '  + str(self.amount)
     
@@ -127,9 +128,17 @@ def check_account_details(sender, instance, **kwargs):
 def update_balance(sender, instance, **kwargs):
     try:
         user = User.objects.get(id=instance.user.id)
+        user.points = user.points + 5
+        user.save()
         account = BankAccount.objects.get(id=instance.account.id, user=user)
         if(instance.transaction_type == 'DEB'):
-            account.balance = account.balance - instance.amount
+            if(account.balance < instance.amount):
+                if(account.balance - instance.amount + account.od_limit > 0):
+                    account.balance = account.balance - instance.amount
+                else:
+                    raise Exception("Insufficient Balance")
+            else:
+                account.balance = account.balance - instance.amount
             try:
                 budget = Budget.objects.get(user=user, account=account, category=instance.category)
                 budget.limit = budget.limit - instance.amount
@@ -150,5 +159,17 @@ def update_balance(sender, instance, **kwargs):
     except BankAccount.DoesNotExist as bae:
         raise Exception("Account does not exist")
     
-# class OCR(models.Model):
-#     image = models.ImageField(upload_to=upload_img_ocr_path_handler)
+class OCR(models.Model):
+    image = models.ImageField(upload_to=upload_img_ocr_path_handler)
+
+class Coupons(models.Model):
+    name = models.CharField(max_length=255, default='Coupon')
+    category = models.CharField(max_length=255, choices=(('Food', 'Food'), ('Shopping', 'Shopping'), ('Transport', 'Transport')))
+    coupon_code = models.CharField(max_length=255, unique=True)
+    discount = models.IntegerField(default=10)
+    expiry_date = models.DateField()
+    value_points = models.IntegerField(default=100)
+
+    def __str__(self):
+        return self.coupon_code
+    

@@ -6,7 +6,7 @@ from django.db.models.signals import pre_save, post_save
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager)
 from rest_framework_simplejwt.tokens import RefreshToken
 from phonenumber_field.modelfields import PhoneNumberField
-# from .ocr import get_gov_doc
+from .ocr import get_gov_doc
 from datetime import datetime as dt
 # Create your models here.
 
@@ -75,6 +75,11 @@ class User(AbstractBaseUser):
         ("T", "Transgender"),
         ("O", "Other")
     )
+    usertypechoices = (
+        ("U", "Upper Class"),
+        ("M", "Middle Class"),
+        ("L", "Lower Class")
+    )
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -83,6 +88,7 @@ class User(AbstractBaseUser):
     username      = models.CharField(unique=True, max_length=100)
     firstname     = models.CharField(max_length=60)
     lastname      = models.CharField(max_length=60, null=True, blank=True)
+    usertype      = models.CharField(max_length=20, choices=usertypechoices, default="M")
     dateofbirth   = models.DateField(null=True, blank=True)
     gender        = models.CharField(max_length=4, choices=genderchoices, blank=True)
     phonenumber   = PhoneNumberField(unique=True)
@@ -139,14 +145,17 @@ class User(AbstractBaseUser):
             'access': str(refresh.access_token)
         }
     
-# @receiver(post_save, sender=User)
-# def add_government_id(sender, instance, **kwargs):
-#     if instance.gov_id_num is None and instance.gov_id_img is not None:
-#         dob, number = get_gov_doc(instance.gov_id_img.path)
-#         formatted_dob = dt.strptime(dob, '%d/%m/%Y').strftime('%Y-%m-%d')
-#         instance.gov_id_num = number
-#         instance.dateofbirth = formatted_dob
-#         instance.save()
+@receiver(post_save, sender=User)
+def add_government_id(sender, instance, **kwargs):
+    try:
+        if instance.gov_id_num is None and instance.gov_id_img is not None:
+            dob, number = get_gov_doc(instance.gov_id_img.path)
+            formatted_dob = dt.strptime(dob, '%d/%m/%Y').strftime('%Y-%m-%d')
+            instance.gov_id_num = number
+            instance.dateofbirth = formatted_dob
+            instance.save()
+    except Exception as e:
+        pass
 
     
 class PhoneNumberVerify(models.Model):

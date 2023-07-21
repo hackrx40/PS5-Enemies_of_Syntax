@@ -8,9 +8,11 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_str, smart_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.urls import reverse
-
+from budget.models import BankAccount
 from .utils import Util
 from django.conf import settings
+from datetime import datetime as dt
+from datetime import timedelta
 
 User = get_user_model()
 
@@ -73,10 +75,19 @@ class LoginSerializer(serializers.ModelSerializer):
             raise AuthenticationFailed("Email not verified yet")
 
         tokens = RefreshToken.for_user(user=auth_user)
+        account = BankAccount.objects.get(user=auth_user)
+        user = User.objects.get(username=username)
+        if user.last_login != dt.now().date():
+            user.points = user.points + 1
+        user.last_login = dt.now()
+        user.save()
         return {
             'username': auth_user.username,
             'refresh': str(tokens),
-            'access': str(tokens.access_token)
+            'access': str(tokens.access_token),
+            'user_id': auth_user.pk,
+            'user_type': auth_user.usertype,
+            "account_id": account.pk
         }
 
 
