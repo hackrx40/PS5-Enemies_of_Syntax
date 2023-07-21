@@ -148,3 +148,17 @@ class LogoutAPIView(generics.GenericAPIView):
         serializer.save()
 
         return Response({'message':'Logged out successfully'}, status=status.HTTP_204_NO_CONTENT)
+    
+
+class UserPoints(mixins.CreateModelMixin, generics.GenericAPIView):
+    serializer_class = UserSerializer
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        try:
+            points = request.data['points']
+            user.points = user.points + points
+            user.save()
+            return JsonResponse({'message': 'Points added successfully', "points": user.points}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return JsonResponse({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
