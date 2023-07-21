@@ -126,10 +126,10 @@ export const links = [
         name: "Transactions",
         url: "/profile/Transactions",
       },
-      {
-        name: "Categories",
-        url: "/profile/categories",
-      },
+      // {
+      //   name: "Categories",
+      //   url: "/profile/categories",
+      // },
     ],
   },
   {

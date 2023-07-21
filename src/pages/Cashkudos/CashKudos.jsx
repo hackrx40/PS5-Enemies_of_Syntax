@@ -21,6 +21,7 @@ const CashKudos = () => {
         marginTop: "10px",
         paddingBottom: "10px",
     });
+    const [points,setPoints] = useState(1000);
 
     var mylevel = 2;
     return <Box sx={{ pt: "80px", pb: "20px" }}>
@@ -37,7 +38,7 @@ const CashKudos = () => {
                             height: "100%",
                         }}
                     >
-                        <CurrStatus />
+                        <CurrStatus points={points}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>
@@ -130,7 +131,7 @@ const CashKudos = () => {
                 </Grid>
             </Grid>
         </ComponentWrapper>
-        <Coupons />
+        <Coupons setPoint={setPoints}/>
 
     </Box>;
 }

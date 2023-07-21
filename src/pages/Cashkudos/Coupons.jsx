@@ -7,6 +7,7 @@ import "./Coupon.css";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import { TbCoinRupee } from "react-icons/tb"
 
 const data = {
   coupons: [
@@ -18,6 +19,7 @@ const data = {
       discount_percent: 10,
       valid_from: "2023-07-01",
       valid_until: "2023-07-31",
+      price: 100,
     },
     {
       coupon_id: 2,
@@ -27,6 +29,8 @@ const data = {
       discount_percent: 20,
       valid_from: "2023-08-01",
       valid_until: "2023-08-31",
+      price: 200,
+
     },
     {
       coupon_id: 3,
@@ -36,6 +40,8 @@ const data = {
       discount_percent: 15,
       valid_from: "2023-09-01",
       valid_until: "2023-09-30",
+      price: 300,
+
     },
   ],
   coupons2: [
@@ -46,6 +52,8 @@ const data = {
       discount_percent: 25,
       valid_from: "2023-07-15",
       valid_until: "2023-07-31",
+      price: 300,
+
     },
     {
       coupon_id: 5,
@@ -54,6 +62,8 @@ const data = {
       discount_percent: 50,
       valid_from: "2023-08-01",
       valid_until: "2023-08-15",
+      price: 1000,
+
     },
     {
       coupon_id: 6,
@@ -62,6 +72,7 @@ const data = {
       discount_percent: 10,
       valid_from: "2023-07-20",
       valid_until: "2023-07-31",
+      price: 500,
     },
   ],
   coupons3: [
@@ -73,6 +84,8 @@ const data = {
       discount_percent: 25,
       valid_from: "2023-07-01",
       valid_until: "2023-07-31",
+      price: 500,
+
     },
     {
       coupon_id: 8,
@@ -82,11 +95,13 @@ const data = {
       discount_percent: 20,
       valid_from: "2023-08-01",
       valid_until: "2023-08-31",
+      price: 700,
+
     },
   ],
 };
 
-const Coupons = () => {
+const Coupons = ({setPoint}) => {
   const CouponLayout = ({
     title,
     description,
@@ -107,10 +122,13 @@ const Coupons = () => {
             }}
           >
             <div style={{ textAlign: "left" }}>
-              <Typography sx={{ fontSize: "1.2rem" }} component="div">
+              <Typography sx={{ fontSize: "1.4rem" }}>
                 {discount}% OFF
               </Typography>
-              <b>{description}</b> <br />
+              <Typography variant="h6">{description}</Typography> <br />
+              <Typography sx={{ fontSize: "0.8rem",color:"#FDC448" }} component="div">
+                <TbCoinRupee style={{fontSize:"20px",transform:"translateY(4px)"}}/> {value}
+              </Typography>
             </div>
             <div>
               <Typography
@@ -128,6 +146,7 @@ const Coupons = () => {
                 <Button
                   variant="contained"
                   onClick={() => {
+                    // setPoint((prev)=>prev-value);
                     setCoupon(title);
                   }}
                   style={{
@@ -196,7 +215,7 @@ const Coupons = () => {
                     description={coupon.category}
                     discount={coupon.discount_percent}
                     valid_until={coupon.valid_until}
-                    value="100"
+                    value={coupon.price}
                   />
                 </Grid>
               );

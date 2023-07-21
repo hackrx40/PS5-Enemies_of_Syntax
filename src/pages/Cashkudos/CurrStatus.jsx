@@ -3,9 +3,8 @@ import badge from "../../assets/images/badge.png"
 import { Typography } from '@mui/material'
 
 
-const CurrStatus = () => {
+const CurrStatus = ({points}) => {
 
-    var points = 1000;
     return (
         <center>
             <img src={badge} style={{ width: '60%' }} alt='badge' />
