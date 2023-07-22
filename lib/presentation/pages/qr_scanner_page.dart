@@ -2,13 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:financeguru/main.dart';
 import 'package:flutter/material.dart';
 import 'package:financeguru/common/gap.dart';
 import 'package:financeguru/style/color.dart';
 import 'package:financeguru/style/typography.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -700,6 +703,48 @@ class _QRScannerPageState extends State<QRScannerPage> {
           //   ),
           // );
           Navigator.of(context).pop();
+          flutterLocalNotificationsPlugin.show(
+              1,
+              "Red Flag Alert 🚩",
+              "Expenses Exceeded! Reevaluate Your Budget Now 📈",
+              NotificationDetails(
+                  android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channelDescription: channel.description,
+                sound: channel.sound,
+                playSound: true,
+              )));
+          
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => AlertDialog(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                ),
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Lottie.asset('assets/json/money_animation.json'),
+                    Container(
+                      child: Text(
+                        '₹ 5 have been credited to your cash!!',
+                        textAlign: TextAlign.center,
+                        style: poppinsBody1.copyWith(color: textColor),
+                      ),
+                    ),
+                  ],
+                ),
+                backgroundColor: Color(0xFF1F1F21)),
+          );
         } else {
           print(response1.statusCode);
           // return false;

@@ -151,27 +151,26 @@ class _IntroductionPageState extends State<IntroductionPage> {
                 // );
                 addData();
               } else if (value == 2) {
-                String token =
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMTM3MDk3LCJpYXQiOjE2ODk4Nzc4OTcsImp0aSI6Ijg2OWE2ZWVlODUwMDRkMWZhNmZjN2UxODcyNzFmN2JiIiwidXNlcl9pZCI6MX0.mUohn8BmnMMQWM21t2Tr1ZtqB0uz85QLN50Q-pKel2Q";
+                String token = GetStorage().read('token');
                 Uri uri = Uri.parse('https://backend-r677breg7a-uc.a.run.app/api/bank/account/');
 
-                var res = await http.post(uri, body: {
-                  "account_type": accountType,
-                  "status": status,
-                  "branch": _branchController.text,
-                  "facility": _facilityController.text,
-                  "currency": _currencyController.text,
-                  "exchange_rate": _exchangeRateController.text,
-                  "balance": _balanceController.text,
-                  "ifsc": _ifscController.text,
-                  "od_limit": _odLimitController.text,
-                  "opening_date": _openingDateController.text,
-                  "drawing_limit": _drawingLimitController.text,
-                  "micr_code": _micrController.text,
-                  "masked_account_no": _maskedAccNoController.text,
-                }, headers: {
-                  "Authorization": "Bearer $token"
-                });
+                var res = await http.post(uri,
+                    body: jsonEncode({
+                      "account_type": accountType,
+                      "status": status,
+                      "branch": _branchController.text,
+                      "facility": _facilityController.text,
+                      "currency": _currencyController.text,
+                      "exchange_rate": _exchangeRateController.text,
+                      "balance": _balanceController.text,
+                      "ifsc": _ifscController.text,
+                      "od_limit": _odLimitController.text,
+                      "opening_date": _openingDateController.text,
+                      "drawing_limit": _drawingLimitController.text,
+                      "micr_code": _micrController.text,
+                      "masked_account_no": _maskedAccNoController.text,
+                    }),
+                    headers: {"Authorization": "Bearer $token"});
 
                 print(res.body);
                 print(res.statusCode);
@@ -340,7 +339,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   height: 30,
                 ),
                 Text(
-                  'Set Youy Bank Account',
+                  'Set Your Bank Account',
                   style: poppinsH1.copyWith(color: buttonColor, fontSize: 36),
                 ),
                 Text(
@@ -942,7 +941,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   style: poppinsH1.copyWith(color: buttonColor, fontSize: 36),
                 ),
                 Text(
-                  'Join us to continue to Kantongku',
+                  'Join us to continue to FinanceGuru',
                   style: poppinsBody1.copyWith(color: textColor),
                 ),
                 // const VerticalGap20(),

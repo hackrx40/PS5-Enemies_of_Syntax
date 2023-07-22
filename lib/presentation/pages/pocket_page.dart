@@ -361,6 +361,7 @@ class _PocketPageState extends State<PocketPage> {
                         content: Text('Budget created successfully'),
                       ),
                     );
+                    Repository().getSavingTarget();
                     // Navigator.pop(context);
                   },
                   child: Container(

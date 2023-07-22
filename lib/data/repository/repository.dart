@@ -49,7 +49,7 @@ class Repository {
       transactions.add(transaction);
     }
 
-    return transactions;
+    return transactions.reversed.toList();
   }
 
   Future<List<CreditCardModel>> getCreditCard() async {

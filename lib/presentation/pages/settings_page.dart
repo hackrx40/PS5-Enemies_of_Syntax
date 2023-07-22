@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
               InkWell(
                 onTap: () {
                   GetStorage().erase();
-                  Navigator.pop(context);   
+                  Navigator.pop(context);
                 },
                 child: Container(
                   child: Row(
@@ -82,7 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    GetStorage().read('username'),
+                    GetStorage().read('username') ?? "User",
                     style: poppinsH4.copyWith(color: textColor),
                   ),
                   Text(
