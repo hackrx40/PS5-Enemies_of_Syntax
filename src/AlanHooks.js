@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const commands = {
     Open_events: "open-transactions",
-    Change_beaches: "change-beach"
+    Change_beaches: "open-points"
 }
 const AlanHooks = () => {
     const navigate = useNavigate();
@@ -19,7 +19,7 @@ const AlanHooks = () => {
 
     const ChangeBeac = useCallback(async () => {
         alanInstance.playText("Opening coupons")
-        navigate("/vendors")
+        navigate("/CashKudos")
     }, [alanInstance, navigate])
 
 
