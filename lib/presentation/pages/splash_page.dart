@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void navigate(BuildContext context) {
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 3), () {
       getInitialRoute();
     });
   }

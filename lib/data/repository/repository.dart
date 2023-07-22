@@ -10,23 +10,36 @@ import 'package:http/http.dart' as http;
 
 class Repository {
   Future<List<SavingTargetModel>> getSavingTarget() async {
-    final jsonString = await rootBundle.loadString('assets/json/saving_target_dummy.json');
-    final jsonData = jsonDecode(jsonString);
-    final List<SavingTargetModel> savingTargets = [];
+    // final jsonString = await rootBundle.loadString('assets/json/saving_target_dummy.json');
+    // final jsonData = jsonDecode(jsonString);
+    // final List<SavingTargetModel> savingTargets = [];
+
+    // for (var item in jsonData) {
+    //   final savingTarget = SavingTargetModel.fromJson(item);
+    //   savingTargets.add(savingTarget);
+    // }
+
+    // return savingTargets;
+    String token = GetStorage().read('token');
+
+    final res = await http.get(Uri.parse('https://backend-r677breg7a-uc.a.run.app/api/budget/userbudget'),
+        headers: {"Authorization": "Bearer $token"});
+    final jsonData = jsonDecode(res.body);
+    final List<SavingTargetModel> transactions = [];
 
     for (var item in jsonData) {
-      final savingTarget = SavingTargetModel.fromJson(item);
-      savingTargets.add(savingTarget);
+      final transaction = SavingTargetModel.fromJson(item);
+      transactions.add(transaction);
     }
 
-    return savingTargets;
+    return transactions;
   }
 
   Future<List<TransactionModel>> getTransaction() async {
     // final jsonString = await rootBundle.loadString('assets/json/transaction_dummy.json');
     String token = GetStorage().read('token');
 
-    final res = await http.get(Uri.parse('https://eaf4-103-149-94-226.ngrok-free.app/api/bank/transaction/'),
+    final res = await http.get(Uri.parse('https://backend-r677breg7a-uc.a.run.app/api/bank/transaction/'),
         headers: {"Authorization": "Bearer $token"});
     final jsonData = jsonDecode(res.body);
     final List<TransactionModel> transactions = [];

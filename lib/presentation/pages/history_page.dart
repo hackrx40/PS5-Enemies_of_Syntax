@@ -118,8 +118,8 @@ class _HistoryPageState extends State<HistoryPage> {
                         children: [
                           Text(
                             data[index].status == false
-                                ? '- \$${data[index].totalMoney}'
-                                : '+ \$${data[index].totalMoney}',
+                                ? '- ₹ ${data[index].totalMoney}'
+                                : '+ ₹ ${data[index].totalMoney}',
                             style: poppinsH3.copyWith(
                               color: data[index].status == false ? Colors.red : Colors.green,
                             ),

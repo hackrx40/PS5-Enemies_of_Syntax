@@ -65,7 +65,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
   Future<void> addData() async {
     try {
       print("hello");
-      String url = 'https://eaf4-103-149-94-226.ngrok-free.app/api/budget/ocr/';
+      String url = 'https://backend-r677breg7a-uc.a.run.app/api/budget/ocr/';
 
       http.MultipartRequest request = http.MultipartRequest('POST', Uri.parse(url));
 
@@ -307,7 +307,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Choose from gallery',
+                                    'Pick from gallery',
                                     style: poppinsH4.copyWith(color: text2Color),
                                   ),
                                 ),
@@ -660,7 +660,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
       // },
 
       onTap: () async {
-        String url = "https://hackrx4prod-r677breg7a-uc.a.run.app/api/bank/transaction/";
+        String url = "https://backend-r677breg7a-uc.a.run.app/api/bank/transaction/";
 
         http.MultipartRequest request = http.MultipartRequest('POST', Uri.parse(url));
 
@@ -694,11 +694,11 @@ class _QRScannerPageState extends State<QRScannerPage> {
           print(responseData);
           print('here1');
 
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Bill Added Successfully'),
-            ),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text('Bill Added Successfully'),
+          //   ),
+          // );
           Navigator.of(context).pop();
         } else {
           print(response1.statusCode);
@@ -720,7 +720,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Icon(
-                Icons.qr_code,
+                Icons.receipt_sharp,
                 color: text2Color,
               ),
               const HorizontalGap5(),

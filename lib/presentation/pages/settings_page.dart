@@ -3,6 +3,7 @@ import 'package:financeguru/common/gap.dart';
 import 'package:financeguru/common/static.dart';
 import 'package:financeguru/style/color.dart';
 import 'package:financeguru/style/typography.dart';
+import 'package:get_storage/get_storage.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -23,6 +24,29 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               profileSection(),
               const VerticalGap10(),
+              InkWell(
+                onTap: () {
+                  GetStorage().erase();
+                  Navigator.pop(context);   
+                },
+                child: Container(
+                  child: Row(
+                    children: [
+                      Text(
+                        "Logout",
+                        style: poppinsBody1.copyWith(color: textColor),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Icon(
+                        Icons.logout,
+                        color: textColor,
+                      )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -58,11 +82,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Listyo Adi Pamungkas',
+                    GetStorage().read('username'),
                     style: poppinsH4.copyWith(color: textColor),
                   ),
                   Text(
-                    'listyoap.work@gmail.com',
+                    'omshukla@gmail.com',
                     style: poppinsCaption.copyWith(
                       color: textColor.withOpacity(.75),
                     ),

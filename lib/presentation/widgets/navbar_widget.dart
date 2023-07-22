@@ -23,7 +23,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
   ];
   final List widgetTitles = const [
     'Home',
-    'Pocket',
+    'Budgets',
     'History',
     'Settings',
   ];
@@ -55,7 +55,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
           backgroundColor: buttonColor,
           elevation: 0,
           child: const Icon(
-            Icons.qr_code_scanner_rounded,
+            Icons.receipt_rounded,
             color: text2Color,
           ),
         ),

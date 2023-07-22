@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,10 +13,12 @@ import 'package:financeguru/data/model/transaction_model.dart';
 import 'package:financeguru/data/repository/repository.dart';
 import 'package:financeguru/style/color.dart';
 import 'package:financeguru/style/typography.dart';
+import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:skeletons/skeletons.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,23 +32,202 @@ class _HomePageState extends State<HomePage> {
   bool _isLoad = true;
   bool _isHidden = true;
   bool _isMore = true;
-  late String balance;
-  late String accountType;
+  String? balance;
+  String? accountType;
+  String? ifscCode;
+  String? odLimit;
+  int? points;
 
+  static const bajajBanner = [
+    "https://cms-assets.bajajfinserv.in/is/image/bajajfinance/doctor-loan-12?scl=1",
+    "https://cms-assets.bajajfinserv.in/is/image/bajajfinance/car-insurance-v1-5?scl=1&fmt=png-alpha",
+    "https://storage.googleapis.com/5paisa-prod-storage/files/2021-09/Bajaj%20Finserv%20gets%20approval%20for%20Mutual%20Fund.jpg"
+  ];
+  static const bajaj_urls = [
+    "https://www.bajajfinserv.in/doctor-loan",
+    "https://www.bajajfinserv.in/marketplace/insurance/car-insurance/car-insurance-premium-calculator/vehicleRegistration",
+    "https://www.bajajfinserv.in/investments/mutual-funds"
+  ];
+  static const bajaj_titles = ["Doctor Loan", "Car Insurance", "Mutual Funds"];
 
-  void isLoadingSuccess() {
+  static const bajajBannerRich = [
+    "https://storage.googleapis.com/5paisa-prod-storage/files/2021-09/Bajaj%20Finserv%20gets%20approval%20for%20Mutual%20Fund.jpg",
+    "https://cms-assets.bajajfinserv.in/is/image/bajajfinance/gold-loan-banner-9?scl=1&fmt=png-alpha",
+    "https://www.bajajfinservsecurities.in/Bajaj/images/demat-account-mobile.jpg"
+  ];
+  static const bajajUrlsRich = [
+    "https://www.bajajfinserv.in/investments/mutual-funds",
+    "https://www.bajajfinserv.in/gold-loan",
+    "https://ekyc2.bajajfinservsecurities.in/ekyc/?utm_source=BFL-SEO-Pages&utm_medium=organic&utm_campaign=demat-landing-page"
+  ];
+  static const bajajTitlesRich = ["Mutual Funds", "Gold Loan", "Trading and Demat"];
+
+  Future<void> _launchUrl(String _url) async {
+    if (!await launchUrl(Uri.parse(_url))) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
+  void isLoadingSuccess() async {
+    String token = GetStorage().read('token');
+
+    final res = await http.get(Uri.parse('https://backend-r677breg7a-uc.a.run.app/api/bank/account/'),
+        headers: {"Authorization": "Bearer $token"});
+
+    final jsonData = jsonDecode(res.body);
+
+    balance = jsonData[0]['balance'];
+    ifscCode = jsonData[0]['ifsc'];
+    odLimit = jsonData[0]['od_limit'];
+
+    final cash_res = await http.get(Uri.parse('https://backend-r677breg7a-uc.a.run.app/api/accounts/profile/'),
+        headers: {"Authorization": "Bearer $token"});
+    final jsonDataRes = jsonDecode(cash_res.body);
+    print(jsonDataRes);
+    points = jsonDataRes['points'];
+    // print(typeofEquals(o, type))
+
+    // setState(() {
+
+    // });
+
+    print(jsonData);
     Future.delayed(const Duration(seconds: 3), () async {
-      String token = GetStorage().read('token');
-
-      final res = await http.get(Uri.parse('https://eaf4-103-149-94-226.ngrok-free.app/api/bank/account/'),
-          headers: {"Authorization": "Bearer $token"});
-      final jsonData = jsonDecode(res.body);
-      print(jsonData);
-      
       setState(() {
         _isLoad = false;
       });
     });
+
+    String userType = GetStorage().read('type');
+    // print(userType);
+    if (userType == "M") {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => AlertDialog(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+            // title: Text(
+            //   "Enter the amount",
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //       // fontSize: getHeight(20),
+            //       color: textColor),
+            // ),
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                    onTap: () {
+                      _launchUrl("https://www.bajajfinserv.in/investments/fixed-deposit");
+                    },
+                    child: Image.network("https://storage.googleapis.com/hackrx/FD.jpg")),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Text(
+                  "Great Job! You have saved 25% of your budget this month. We recommend investing these savings and gaining profit via our Bajaj Finserv Services!",
+                  textAlign: TextAlign.center,
+                  style: poppinsBody1.copyWith(color: textColor),
+                ),
+              ],
+            ),
+            backgroundColor: Color(0xFF1F1F21)),
+      );
+    } else if (userType == "L") {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => AlertDialog(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+            // title: Text(
+            //   "Enter the amount",
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //       // fontSize: getHeight(20),
+            //       color: textColor),
+            // ),
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                    onTap: () {
+                      _launchUrl("https://www.bajajfinserv.in/personal-loan");
+                    },
+                    child: Image.network("https://storage.googleapis.com/hackrx/personal-loan.png")),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Text(
+                  "ALERT! You're about to exhaust your budget earlier than expected. We suggest you checking out our loans curated for you",
+                  textAlign: TextAlign.center,
+                  style: poppinsBody1.copyWith(color: textColor),
+                ),
+              ],
+            ),
+            backgroundColor: Color(0xFF1F1F21)),
+      );
+    } else {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => AlertDialog(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+            // title: Text(
+            //   "Enter the amount",
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //       // fontSize: getHeight(20),
+            //       color: textColor),
+            // ),
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                    onTap: () {
+                      _launchUrl("https://www.bajajfinserv.in/gold-loan");
+                    },
+                    child: Image.network(
+                        "https://www.bajajfinservmarkets.in/content/dam/bajajfinserv/banner-website/GoldLoanThumbnail.jpg")),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Text(
+                  "WE ROLLING! Since your financial well being, we suggest you to invest your cash flow in streamlines! Check them out",
+                  textAlign: TextAlign.center,
+                  style: poppinsBody1.copyWith(color: textColor),
+                ),
+              ],
+            ),
+            backgroundColor: Color(0xFF1F1F21)),
+      );
+    }
   }
 
   @override
@@ -161,6 +343,16 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 25,
               ),
+              Container(
+                child: Text(
+                  'We will invest 10% of this amount in our cash for exciting benefits',
+                  textAlign: TextAlign.center,
+                  style: poppinsBody1.copyWith(color: textColor.withOpacity(.5)),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
               Center(
                 child: CupertinoButton(
                   child: Text(
@@ -194,6 +386,56 @@ class _HomePageState extends State<HomePage> {
     return false;
   }
 
+  void updateUserCredits(double pt) async {
+    String token = GetStorage().read('token');
+    Uri uri = Uri.parse('https://backend-r677breg7a-uc.a.run.app/api/accounts/pointsincrement/');
+    final res = await http.post(uri,
+        body: jsonEncode({
+          "points": pt,
+        }),
+        headers: {"Authorization": "Bearer $token", 'Content-Type': 'application/json'});
+    final jsonData = jsonDecode(res.body);
+    setState(() {
+      print(jsonData);
+      points = jsonData['points'].toInt();
+    });
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Lottie.asset('assets/json/money_animation.json'),
+              Container(
+                child: Text(
+                  '₹ $pt have been credited to your cash!!',
+                  textAlign: TextAlign.center,
+                  style: poppinsBody1.copyWith(color: textColor),
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Color(0xFF1F1F21)),
+    );
+    // print(body);
+    if (res.statusCode != 200) {
+      print('incorrect');
+    }
+
+    print(res.body);
+  }
+
   payAmount(int amount) {
     print(amount);
 
@@ -202,6 +444,7 @@ class _HomePageState extends State<HomePage> {
       // Do something when payment succee
       print("Payment success");
       print(response.paymentId);
+      updateUserCredits(((amount / 100) * 10) / 100);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Payment Success"),
@@ -289,6 +532,8 @@ class _HomePageState extends State<HomePage> {
               paymentSection(context),
               const VerticalGap20(),
               savingTargetSection(context),
+              const VerticalGap20(),
+              carouselSection(context),
               const VerticalGap20(),
               transactionSection(context),
             ],
@@ -434,8 +679,8 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Text(
                                   data[index].status == false
-                                      ? '- \$${data[index].totalMoney}'
-                                      : '+ \$${data[index].totalMoney}',
+                                      ? '- ₹ ${data[index].totalMoney}'
+                                      : '+ ₹ ${data[index].totalMoney}',
                                   style: poppinsH3.copyWith(
                                     color: data[index].status == false ? Colors.red : Colors.green,
                                   ),
@@ -499,7 +744,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const HorizontalGap5(),
                     Text(
-                      'Saving Targets & Goals',
+                      'Your Budgets',
                       style: poppinsH4.copyWith(
                         color: textColor,
                       ),
@@ -531,9 +776,9 @@ class _HomePageState extends State<HomePage> {
                       separatorBuilder: (context, index) => const HorizontalGap10(),
                       itemCount: data!.length,
                       itemBuilder: (context, index) {
-                        final formatter = NumberFormat('#,###');
-                        final savingValue = formatter.format(data[index].hasSaving);
-                        final targetValue = formatter.format(data[index].totalSaving);
+                        // final formatter = NumberFormat('#,###');
+                        final savingValue = data[index].currentLimit;
+                        final targetValue = data[index].limit;
                         return Container(
                           width: MediaQuery.of(context).size.width / 1.25,
                           decoration: BoxDecoration(
@@ -552,14 +797,14 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    data[index].purposeName,
+                                    data[index].budgetName,
                                     style: poppinsBody1.copyWith(
                                       color: textColor.withOpacity(.75),
                                     ),
                                   ),
                                   const VerticalGap5(),
                                   Text(
-                                    '\$$savingValue',
+                                    '₹$savingValue',
                                     style: poppinsBody1.copyWith(
                                       fontSize: 28,
                                       color: buttonColor,
@@ -567,7 +812,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   const VerticalGap5(),
                                   Text(
-                                    '\$$targetValue left in ${data[index].monthDuration} months',
+                                    '₹${double.parse(targetValue) - double.parse(savingValue)} spend in 6 months',
                                     style: poppinsBody2.copyWith(
                                       color: textColor.withOpacity(.5),
                                     ),
@@ -577,9 +822,9 @@ class _HomePageState extends State<HomePage> {
                               CircularPercentIndicator(
                                 radius: 40,
                                 lineWidth: 6,
-                                percent: data[index].hasSaving / data[index].totalSaving,
+                                percent: double.parse(data[index].currentLimit) / double.parse(data[index].limit),
                                 center: Text(
-                                  '${(data[index].hasSaving / data[index].totalSaving * 100).toStringAsFixed(0)}%',
+                                  '${(double.parse(data[index].currentLimit) / double.parse(data[index].limit) * 100).toStringAsFixed(0)}%',
                                   style: poppinsBody1.copyWith(
                                     color: textColor,
                                   ),
@@ -605,6 +850,148 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
                 },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Skeleton carouselSection(BuildContext context) {
+    return Skeleton(
+      duration: const Duration(seconds: 2),
+      isLoading: _isLoad,
+      themeMode: ThemeMode.dark,
+      darkShimmerGradient: LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          secondaryColor,
+          secondaryColor.withOpacity(.75),
+          secondaryColor,
+        ],
+        tileMode: TileMode.repeated,
+      ),
+      skeleton: const MediumSkeleton(),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(
+                      Icons.cloud_circle_rounded,
+                      color: textColor,
+                      size: 24,
+                    ),
+                    const HorizontalGap5(),
+                    Text(
+                      'Recommendations',
+                      style: poppinsH4.copyWith(
+                        color: textColor,
+                      ),
+                    ),
+                  ],
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: const Icon(
+                    Icons.arrow_circle_right,
+                    color: textColor,
+                    size: 28,
+                  ),
+                )
+              ],
+            ),
+            const VerticalGap10(),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 140,
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  height: 170,
+                  viewportFraction: 0.8,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 2),
+                ),
+                items: (GetStorage().read('type') == "M" || GetStorage().read('type') == "L")
+                    ? bajajBanner.map((i) {
+                        int idx = bajajBanner.indexOf(i);
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return InkWell(
+                              onTap: () {
+                                _launchUrl(bajaj_urls[idx]);
+                              },
+                              child: Container(
+                                  // height: 100,
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.symmetric(horizontal: 10.0),
+                                  // padding: EdgeInsets.all(15.0),
+                                  alignment: Alignment.bottomLeft,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(image: NetworkImage("${i}"), fit: BoxFit.cover),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    width: double.infinity,
+                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                                    child: Text(
+                                      bajaj_titles[idx],
+                                      style:
+                                          TextStyle(fontSize: 12.0, color: Colors.white, fontWeight: FontWeight.w500),
+                                    ),
+                                  )),
+                            );
+                          },
+                        );
+                      }).toList()
+                    : bajajBannerRich.map((i) {
+                        int idx = bajajBannerRich.indexOf(i);
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return InkWell(
+                              onTap: () {
+                                _launchUrl(bajajUrlsRich[idx]);
+                              },
+                              child: Container(
+                                  // height: 100,
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.symmetric(horizontal: 10.0),
+                                  // padding: EdgeInsets.all(15.0),
+                                  alignment: Alignment.bottomLeft,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(image: NetworkImage("${i}"), fit: BoxFit.cover),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    width: double.infinity,
+                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                                    child: Text(
+                                      bajajTitlesRich[idx],
+                                      style:
+                                          TextStyle(fontSize: 12.0, color: Colors.white, fontWeight: FontWeight.w500),
+                                    ),
+                                  )),
+                            );
+                          },
+                        );
+                      }).toList(),
               ),
             ),
           ],
@@ -762,7 +1149,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: [
                 Text(
-                  _isHidden ? '\₹550,752,210' : '---------',
+                  _isHidden ? '\₹ ${balance}' : '---------',
                   style: poppinsH1.copyWith(
                     color: buttonColor,
                     fontWeight: FontWeight.w600,
@@ -796,56 +1183,56 @@ class _HomePageState extends State<HomePage> {
                     color: textColor.withOpacity(.25),
                   ),
                   const VerticalGap10(),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       'Investation (0,00%)',
+                  //       style: poppinsH5.copyWith(
+                  //         color: textColor.withOpacity(.75),
+                  //       ),
+                  //     ),
+                  //     Text(
+                  //       'Rp 0',
+                  //       style: poppinsH5.copyWith(
+                  //         color: textColor.withOpacity(.75),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // const VerticalGap5(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Investation (0,00%)',
-                        style: poppinsH5.copyWith(
-                          color: textColor.withOpacity(.75),
-                        ),
-                      ),
-                      Text(
-                        'Rp 0',
-                        style: poppinsH5.copyWith(
-                          color: textColor.withOpacity(.75),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const VerticalGap5(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              color: Colors.white,
-                              image: const DecorationImage(
-                                image: AssetImage(imgBibit),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          const HorizontalGap5(),
-                          Text(
-                            'Reksa Dana Bibit',
-                            style: poppinsBody2.copyWith(
-                              color: textColor.withOpacity(.75),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        'Rp 0',
-                        style: poppinsBody2.copyWith(
-                          color: textColor.withOpacity(.75),
-                        ),
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Container(
+                      //       width: 20,
+                      //       height: 20,
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(40),
+                      //         color: Colors.white,
+                      //         image: const DecorationImage(
+                      //           image: AssetImage(imgBibit),
+                      //           fit: BoxFit.cover,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     const HorizontalGap5(),
+                      //     Text(
+                      //       'Reksa Dana Bibit',
+                      //       style: poppinsBody2.copyWith(
+                      //         color: textColor.withOpacity(.75),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      // Text(
+                      //   'Rp 0',
+                      //   style: poppinsBody2.copyWith(
+                      //     color: textColor.withOpacity(.75),
+                      //   ),
+                      // ),
                     ],
                   ),
                   const VerticalGap10(),
@@ -853,19 +1240,54 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Cash Money (100,00%)',
+                        'Cash Money (100.00%)',
                         style: poppinsH5.copyWith(
                           color: textColor.withOpacity(.75),
                         ),
                       ),
                       Text(
-                        '\$550,752,210',
+                        '\₹ ${balance}',
                         style: poppinsH5.copyWith(
                           color: textColor.withOpacity(.75),
                         ),
                       ),
                     ],
                   ),
+                  const VerticalGap5(),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Row(
+                  //       children: [
+                  //         Container(
+                  //           width: 20,
+                  //           height: 20,
+                  //           decoration: BoxDecoration(
+                  //             borderRadius: BorderRadius.circular(40),
+                  //             color: Colors.white,
+                  //             image: const DecorationImage(
+                  //               image: AssetImage(imgProfile),
+                  //               fit: BoxFit.cover,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         const HorizontalGap5(),
+                  //         Text(
+                  //           'Saving Pocket',
+                  //           style: poppinsBody2.copyWith(
+                  //             color: textColor.withOpacity(.75),
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //     Text(
+                  //       'Rp 0',
+                  //       style: poppinsBody2.copyWith(
+                  //         color: textColor.withOpacity(.75),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   const VerticalGap5(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -886,7 +1308,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           const HorizontalGap5(),
                           Text(
-                            'Saving Pocket',
+                            'Account Type',
                             style: poppinsBody2.copyWith(
                               color: textColor.withOpacity(.75),
                             ),
@@ -894,7 +1316,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Text(
-                        'Rp 0',
+                        'Savings',
                         style: poppinsBody2.copyWith(
                           color: textColor.withOpacity(.75),
                         ),
@@ -907,21 +1329,9 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Row(
                         children: [
-                          Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              color: Colors.white,
-                              image: const DecorationImage(
-                                image: AssetImage(imgProfile),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          const HorizontalGap5(),
+                          // const HorizontalGap5(),
                           Text(
-                            'Payment Pocket',
+                            'IFSC CODE',
                             style: poppinsBody2.copyWith(
                               color: textColor.withOpacity(.75),
                             ),
@@ -929,7 +1339,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Text(
-                        '\$550,752,210',
+                        '${ifscCode}',
                         style: poppinsBody2.copyWith(
                           color: textColor.withOpacity(.75),
                         ),
@@ -942,21 +1352,9 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Row(
                         children: [
-                          Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              color: Colors.white,
-                              image: const DecorationImage(
-                                image: AssetImage(imgGopay),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          const HorizontalGap5(),
+                          // const HorizontalGap5(),
                           Text(
-                            'Gopay',
+                            'OD Limit',
                             style: poppinsBody2.copyWith(
                               color: textColor.withOpacity(.75),
                             ),
@@ -964,13 +1362,14 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Text(
-                        'Rp 0',
+                        '${odLimit}',
                         style: poppinsBody2.copyWith(
                           color: textColor.withOpacity(.75),
                         ),
                       ),
                     ],
                   ),
+                  const VerticalGap5(),
                 ],
               ),
             ),
@@ -1017,21 +1416,61 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                color: Colors.white,
-                image: const DecorationImage(
-                  image: AssetImage(imgProfile),
-                  fit: BoxFit.cover,
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    width: 1,
+                    color: textColor,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/wallet.png",
+                      height: 35,
+                      width: 35,
+                    ),
+                    SizedBox(
+                      width: 7,
+                    ),
+                    Text(
+                      points.toString(),
+                      style: poppinsBody1.copyWith(
+                        color: textColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    // SizedBox(
+                    //   width: 15,
+                    // )
+                  ],
                 ),
               ),
-              padding: const EdgeInsets.all(8),
-            ),
+              SizedBox(
+                width: 15,
+              ),
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                    color: Colors.white,
+                    image: const DecorationImage(
+                      image: AssetImage(imgProfile),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(8),
+                ),
+              ),
+            ],
           ),
         ],
       ),

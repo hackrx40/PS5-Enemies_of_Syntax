@@ -163,8 +163,8 @@ class _SigninPageState extends State<SigninPage> {
             InkWell(
               onTap: () async {
                 // Navigator.pushNamed(context, NavigationBarWidget.routeName);
-                if (!formKey.currentState!.validate()) return;
-                formKey.currentState!.save();
+                // if (!formKey.currentState!.validate()) return;
+                // formKey.currentState!.save();
 
                 print('Button pressed ...');
 
@@ -180,8 +180,8 @@ class _SigninPageState extends State<SigninPage> {
                 Loader.hide();
                 flutterLocalNotificationsPlugin.show(
                     1,
-                    "SSR's murderer found",
-                    "Politician on the run after warrant declared against his name.Fans ask for his head",
+                    "Hey There!",
+                    "Today begins your journey to a financially organised life",
                     NotificationDetails(
                         android: AndroidNotificationDetails(
                       channel.id,

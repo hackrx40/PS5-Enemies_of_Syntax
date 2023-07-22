@@ -338,7 +338,7 @@ class _PocketPageState extends State<PocketPage> {
 
                     String token = GetStorage().read('token');
 
-                    Uri uri = Uri.parse("https://eaf4-103-149-94-226.ngrok-free.app/api/budget/userbudget/");
+                    Uri uri = Uri.parse("https://backend-r677breg7a-uc.a.run.app/api/budget/userbudget/");
 
                     var res = await http.post(uri,
                         body: jsonEncode(

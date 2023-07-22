@@ -49,7 +49,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
   Future<void> addData() async {
     try {
       print("hello");
-      String url = 'https://eaf4-103-149-94-226.ngrok-free.app/api/accounts/profile/';
+      String url = 'https://backend-r677breg7a-uc.a.run.app/api/accounts/profile/';
 
       http.MultipartRequest request = http.MultipartRequest('PATCH', Uri.parse(url));
 
@@ -133,7 +133,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
         body: IntroductionScreen(
             onChange: (value) async {
               if (value == 1) {
-                // Uri uri = Uri.parse('https://eaf4-103-149-94-226.ngrok-free.app/api/accounts/profile/');
+                // Uri uri = Uri.parse('https://backend-r677breg7a-uc.a.run.app/api/accounts/profile/');
 
                 // var res = await http.patch(uri, body: {
                 //   "gov_id_img": "https://burst.shopifycdn.com/photos/blue-lake-and-rocky-mountains.jpg",
@@ -153,7 +153,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
               } else if (value == 2) {
                 String token =
                     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMTM3MDk3LCJpYXQiOjE2ODk4Nzc4OTcsImp0aSI6Ijg2OWE2ZWVlODUwMDRkMWZhNmZjN2UxODcyNzFmN2JiIiwidXNlcl9pZCI6MX0.mUohn8BmnMMQWM21t2Tr1ZtqB0uz85QLN50Q-pKel2Q";
-                Uri uri = Uri.parse('https://eaf4-103-149-94-226.ngrok-free.app/api/bank/account/');
+                Uri uri = Uri.parse('https://backend-r677breg7a-uc.a.run.app/api/bank/account/');
 
                 var res = await http.post(uri, body: {
                   "account_type": accountType,
