@@ -20,10 +20,7 @@ const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
   const drawer = (
     <div>
       <Toolbar sx={{ display: "flex", flexDirection: "center" }}>
-        <div>
-          <img width="40%" src={icon} alt="icon" />{" "}
-        </div>
-        <Toaster />
+        <img width="40%" src={icon} alt="icon" /> <Toaster />
       </Toolbar>
       <Divider />
       <List disablePadding>
