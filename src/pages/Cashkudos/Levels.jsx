@@ -51,7 +51,7 @@ const Levels = ({ mylevel }) => {
                                 <Typography>Level {index + 1}</Typography>
                             </Stack>
                             <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
-                                ${amount}
+                                ₹{amount}
                             </Typography>
                         </Stack>
                     )
@@ -67,10 +67,10 @@ const Levels = ({ mylevel }) => {
                             >
                                 <Stack direction={"row"} alignItems="center" spacing={1}>
                                     <Avatar src="https://clipartix.com/wp-content/uploads/2018/03/cartoon-trophy-2018-26.jpg" sx={{ width: 40, height: 40 }} />
-                                    <Typography style={{fontWeight:700}}>Level {index + 1}</Typography>
+                                    <Typography style={{ fontWeight: 700 }}>Level {index + 1}</Typography>
                                 </Stack>
                                 <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
-                                    ${amount}
+                                    ₹{amount}
                                 </Typography>
                             </Stack>
                         ) :
@@ -88,7 +88,7 @@ const Levels = ({ mylevel }) => {
                                     <Typography>Level {index + 1}</Typography>
                                 </Stack>
                                 <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
-                                    ${amount}
+                                    ₹{amount}
                                 </Typography>
                             </Stack>)
 

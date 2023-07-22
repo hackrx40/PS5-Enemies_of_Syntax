@@ -10,7 +10,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import CurrStatus from './CurrStatus';
-import { FaEllipsisH } from "react-icons/fa";
+import { FaEllipsisH, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { customers } from "../../data/customers";
 import { transactions, transactionsColumns } from "../../data/transactions";
@@ -21,7 +21,7 @@ const CashKudos = () => {
         marginTop: "10px",
         paddingBottom: "10px",
     });
-    const [points,setPoints] = useState(1000);
+    const [points, setPoints] = useState(1000);
 
     var mylevel = 2;
     return <Box sx={{ pt: "80px", pb: "20px" }}>
@@ -38,7 +38,7 @@ const CashKudos = () => {
                             height: "100%",
                         }}
                     >
-                        <CurrStatus points={points}/>
+                        <CurrStatus points={points} />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>
@@ -107,7 +107,7 @@ const CashKudos = () => {
                                                     </Typography>
                                                 </Box>
                                             </Box>
-                                            <FaEllipsisH />
+                                            <a href="http://twitter.com/share?text=text goes here&url=http://url goes here&hashtags=hashtag1,hashtag2,hashtag3" target="_blank"><FaTwitter /></a>
                                         </Box>
                                     ))}
                             </Box>
@@ -131,9 +131,9 @@ const CashKudos = () => {
                 </Grid>
             </Grid>
         </ComponentWrapper>
-        <Coupons setPoints={setPoints} points={points}/>
+        <Coupons setPoints={setPoints} points={points} />
 
-    </Box>;
+    </Box >;
 }
 
 export default CashKudos;

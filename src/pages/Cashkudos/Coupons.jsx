@@ -8,6 +8,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { TbCoinRupee } from "react-icons/tb"
+import { useEffect } from "react";
+import axios from "axios";
 
 const data = {
   coupons: [
@@ -101,7 +103,25 @@ const data = {
   ],
 };
 
-const Coupons = ({setPoints, points}) => {
+const Coupons = ({ setPoints, points }) => {
+  const [dynamicData, setDynamicData] = React.useState();
+  useEffect(() => {
+    var config = {
+      method: 'get',
+      url: 'https://eaf4-103-149-94-226.ngrok-free.app/api/budget/coupons/',
+      headers: {}
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setDynamicData(response.data);
+        console.log(dynamicData);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
   const CouponLayout = ({
     title,
     description,
@@ -113,7 +133,7 @@ const Coupons = ({setPoints, points}) => {
 
     const handleRedemption = (title, value) => {
       setCoupon(title);
-      setPoints((prev)=>prev-value);
+      setPoints((prev) => prev - value);
       console.log(title, points);
     };
 
@@ -132,8 +152,8 @@ const Coupons = ({setPoints, points}) => {
                 {discount}% OFF
               </Typography>
               <Typography variant="h6">{description}</Typography> <br />
-              <Typography sx={{ fontSize: "0.8rem",color:"#FDC448" }} component="div">
-                <TbCoinRupee style={{fontSize:"20px",transform:"translateY(4px)"}}/> {value}
+              <Typography sx={{ fontSize: "0.8rem", color: "#FDC448" }} component="div">
+                <TbCoinRupee style={{ fontSize: "20px", transform: "translateY(4px)" }} /> {value}
               </Typography>
             </div>
             <div>
@@ -206,10 +226,28 @@ const Coupons = ({setPoints, points}) => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
+          <Tab label="All" />
           <Tab label="Food" />
           <Tab label="Transport" />
           <Tab label="Utilities" />
         </Tabs>
+        <CustomTabPanel value={value} index={0}>
+          <Grid container spacing={3}>
+            {dynamicData?.map((coupon) => {
+              return (
+                <Grid item xs={12} md={6} lg={4}>
+                  <CouponLayout
+                    title={coupon.name}
+                    description={coupon.category}
+                    discount={coupon.discount}
+                    valid_until={coupon.expiry_date}
+                    value={coupon.value_points}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </CustomTabPanel>
         <CustomTabPanel value={value} index={0}>
           <Grid container spacing={3}>
             {data.coupons.map((coupon) => {
