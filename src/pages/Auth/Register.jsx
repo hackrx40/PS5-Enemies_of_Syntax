@@ -40,7 +40,7 @@ const validationSchema = yup.object({
     .string("Enter your Confirm Password")
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
-  phoneNumber: yup
+  phonenumber: yup
     .string("Enter your Phone Number")
     .min(10, "Phone Number is too short")
     .max(10, "Phone Number is too long")
@@ -90,12 +90,10 @@ const Signup = () => {
   const formik = useFormik({
     initialValues: {
       firstname: "",
-      secretName: "",
       password: "",
-      lastname: "",
-      confirmpass: "",
-      phoneNumber: "",
-      pancard: "",
+      phonenumber: "",
+      dateofbirth: "",
+      gender: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -105,10 +103,12 @@ const Signup = () => {
       formdata.append("name", values.firstname + " " + values.lastname);
       formdata.append("password", values.password);
       formdata.append("email", values.email);
-      formdata.append("phoneNumber", values.phoneNumber);
+      formdata.append("phonenumber", values.phonenumber);
+      formdata.append("dateofbirth", values.dateofbirth);
+      formdata.append("gender", values.gender);
       try {
         let response = await axios.post(
-          "https://hackrx4prod-r677breg7a-uc.a.run.app/api/signup",
+          "https://hackrx4prod-r677breg7a-uc.a.run.app/api/accounts/signup",
           formdata
         );
         if (response.status === 201) {
@@ -140,12 +140,12 @@ const Signup = () => {
   };
   // definition
   var data = {
-    name: formik.values.firstname + " " + formik.values.lastname,
+    name: formik.values.firstname,
     email: formik.values.email,
     password: formik.values.password,
-    phoneNumber: formik.values.phoneNumber,
-    pancard: formik.values.pancard,
-    metamask: "",
+    phonenumber: formik.values.phonenumber,
+    gender: formik.values.gender,
+    dateofbirth: formik.values.dateofbirth,
   };
 
   const verifyPan = () => {
@@ -237,7 +237,7 @@ const Signup = () => {
       name: formik.values.firstname + " " + formik.values.lastname,
       email: formik.values.email,
       password: formik.values.password,
-      phoneNumber: formik.values.phoneNumber,
+      phonenumber: formik.values.phonenumber,
       pancard: "",
       metamask: accountAddress,
     };
@@ -367,25 +367,6 @@ const Signup = () => {
                           Sign Up
                         </Grid>
                         <Grid item xs={12} sm={12} md={12}>
-                          {haveMetamask ? (
-                            <>
-                              <Typography>Metamask is installed</Typography>
-                              {isConnected ? (
-                                <Typography>
-                                  {" "}
-                                  {accountAddress} : {accountBalance} ETH{" "}
-                                </Typography>
-                              ) : (
-                                <Button onClick={() => connectMetamask()}>
-                                  Web3 Not Enabled
-                                </Button>
-                              )}
-                            </>
-                          ) : (
-                            <Typography>Install Metamask</Typography>
-                          )}
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12}>
                           <Grid container spacing={2}>
                             <Grid item xs={12} md={6}>
                               <TextField
@@ -402,24 +383,6 @@ const Signup = () => {
                                 helperText={
                                   formik.touched.firstname &&
                                   formik.errors.firstname
-                                }
-                              />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                              <TextField
-                                fullWidth
-                                id="lastname"
-                                name="lastname"
-                                label="Last Name"
-                                value={formik.values.lastname}
-                                onChange={formik.handleChange}
-                                error={
-                                  formik.touched.lastname &&
-                                  Boolean(formik.errors.lastname)
-                                }
-                                helperText={
-                                  formik.touched.lastname &&
-                                  formik.errors.lastname
                                 }
                               />
                             </Grid>
@@ -447,18 +410,18 @@ const Signup = () => {
                             <Grid item xs={12} md={6}>
                               <TextField
                                 fullWidth
-                                id="phoneNumber"
-                                name="phoneNumber"
+                                id="phonenumber"
+                                name="phonenumber"
                                 label="Phone Number"
-                                value={formik.values.phoneNumber}
+                                value={formik.values.phonenumber}
                                 onChange={formik.handleChange}
                                 error={
-                                  formik.touched.phoneNumber &&
-                                  Boolean(formik.errors.phoneNumber)
+                                  formik.touched.phonenumber &&
+                                  Boolean(formik.errors.phonenumber)
                                 }
                                 helperText={
-                                  formik.touched.phoneNumber &&
-                                  formik.errors.phoneNumber
+                                  formik.touched.phonenumber &&
+                                  formik.errors.phonenumber
                                 }
                               />
                             </Grid>
@@ -508,83 +471,9 @@ const Signup = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={12} md={6}>
-                                <TextField
-                                  fullWidth
-                                  id="confirmpass"
-                                  name="confirmpass"
-                                  label="Confirm Password"
-                                  type={passwordShow2 ? "text" : "password"}
-                                  value={formik.values.confirmpass}
-                                  onChange={formik.handleChange}
-                                  error={
-                                    formik.touched.confirmpass &&
-                                    Boolean(formik.errors.confirmpass)
-                                  }
-                                  helperText={
-                                    formik.touched.confirmpass &&
-                                    formik.errors.confirmpass
-                                  }
-                                  InputProps={{
-                                    endAdornment: (
-                                      <InputAdornment position="end">
-                                        <IconButton
-                                          aria-label="toggle password visibility"
-                                          onMouseDown={(e) =>
-                                            e.preventDefault()
-                                          }
-                                          edge="end"
-                                          onClick={() => {
-                                            setpassword2(!passwordShow2);
-                                          }}
-                                        >
-                                          {passwordShow2 ? (
-                                            <VisibilityOff />
-                                          ) : (
-                                            <Visibility />
-                                          )}
-                                        </IconButton>
-                                      </InputAdornment>
-                                    ),
-                                  }}
-                                />
-                              </Grid>
                             </Grid>
                           </Grid>
                           <br />
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12}>
-                          <Grid container spacing={2}>
-                            <Grid item xs={12} md={6}>
-                              <Button
-                                size="large"
-                                variant="contained"
-                                fullWidth
-                                sx={{
-                                  backgroundColor: "black",
-                                }}
-                                onClick={handleRoleChange}
-                              >
-                                {role === "User"
-                                  ? "Connect Metamask"
-                                  : "Register without Metamask"}
-                              </Button>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                              <Button
-                                size="large"
-                                variant="contained"
-                                fullWidth
-                                type="submit"
-                                sx={{
-                                  backgroundColor: "black",
-                                }}
-                                onClick={registerMetamask}
-                              >
-                                Submit
-                              </Button>
-                            </Grid>
-                          </Grid>
                         </Grid>
                         <Grid item xs={12} sm={12} md={12}></Grid>
                         <Grid
@@ -744,18 +633,18 @@ const Signup = () => {
                             <Grid item xs={12} md={6}>
                               <TextField
                                 fullWidth
-                                id="phoneNumber"
-                                name="phoneNumber"
+                                id="phonenumber"
+                                name="phonenumber"
                                 label="Phone Number"
-                                value={formik.values.phoneNumber}
+                                value={formik.values.phonenumber}
                                 onChange={formik.handleChange}
                                 error={
-                                  formik.touched.phoneNumber &&
-                                  Boolean(formik.errors.phoneNumber)
+                                  formik.touched.phonenumber &&
+                                  Boolean(formik.errors.phonenumber)
                                 }
                                 helperText={
-                                  formik.touched.phoneNumber &&
-                                  formik.errors.phoneNumber
+                                  formik.touched.phonenumber &&
+                                  formik.errors.phonenumber
                                 }
                               />
                             </Grid>
@@ -850,40 +739,6 @@ const Signup = () => {
                           </Grid>
                           <br />
                         </Grid>
-                        <Grid item xs={12} sm={12} md={12}>
-                          <Grid container spacing={2}>
-                            <Grid item xs={12} md={6}>
-                              <Button
-                                size="large"
-                                variant="contained"
-                                fullWidth
-                                sx={{
-                                  backgroundColor: "black",
-                                }}
-                                onClick={handleRoleChange}
-                              >
-                                {role === "User"
-                                  ? "Connect Metamask"
-                                  : "Register without Metamask"}
-                              </Button>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                              <Button
-                                size="large"
-                                variant="contained"
-                                fullWidth
-                                type="submit"
-                                sx={{
-                                  backgroundColor: "black",
-                                }}
-                                onClick={registerMetamask}
-                              >
-                                Generate OTP
-                              </Button>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12}></Grid>
                         <Grid
                           item
                           xs={12}

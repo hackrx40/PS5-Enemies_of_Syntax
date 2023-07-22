@@ -1,7 +1,6 @@
 import React from "react";
-import { Box, Divider, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import CircularBar from "./CircularBar";
-import { FiInfo } from "react-icons/fi";
 
 const AveargeTotals = () => {
   return (
@@ -16,7 +15,7 @@ const AveargeTotals = () => {
         padding: "16px",
       }}
     >
-      <Typography variant="h5">Average Total Sales</Typography>
+      <Typography variant="h5">Expenditure Modes</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
         2022-2023
       </Typography>
@@ -38,7 +37,7 @@ const AveargeTotals = () => {
               92,980
             </Typography>
             <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
-              Cases
+              UPI
             </Typography>
           </Box>
         </Box>
@@ -50,7 +49,7 @@ const AveargeTotals = () => {
               23,980
             </Typography>
             <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
-              Applications
+              Debit Card
             </Typography>
           </Box>
         </Box>
@@ -62,21 +61,10 @@ const AveargeTotals = () => {
               14,980
             </Typography>
             <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
-              Products
+              Others
             </Typography>
           </Box>
         </Box>
-      </Box>
-      <Divider />
-      <Box sx={{ display: "flex", gap: 2, pt: 2 }}>
-        <Box>
-          <FiInfo />
-        </Box>
-        <Typography variant="subtitle2" sx={{ opacity: 0.8 }}>
-          Note: Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-          aliquam quos minima, aperiam iste doloremque quis reprehenderit ad
-          placeat beatae veniam natus tempore quod a?
-        </Typography>
       </Box>
     </Paper>
   );

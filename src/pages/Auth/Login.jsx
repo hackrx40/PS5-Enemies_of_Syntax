@@ -29,17 +29,6 @@ const Login = () => {
     onTop();
   }, []);
 
-  // useEffect(() => {
-  //     function start() {
-  //         gapi.client.init({
-  //             clientId: "537010121754-h774kl4n7hd7ncg3ili9svdffrch9hmb.apps.googleusercontent.com",
-  //             scope: 'email',
-  //         });
-  //     }
-
-  //     gapi.load('client:auth2', start);
-  // }, []);
-
   const [passwordShow, setpassword] = React.useState(false);
   const [username, setUsername] = React.useState("");
 

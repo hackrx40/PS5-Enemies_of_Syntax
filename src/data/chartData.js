@@ -154,12 +154,12 @@ export const barChartOptions = {
 
 export const salesLineChartData = [
   {
-    name: "Expenditure",
-    data: [50, 64, 48, 24, 49, 68],
+    name: "Current Balance",
+    data: [15889.36, 14806, 4295.36, 716.11, 4716.11, 3991.11],
   },
   {
-    name: "Savings",
-    data: [70, 25, 76, 46, 20, 46],
+    name: "Amount",
+    data: [1083.36, 10510.64, 3579.25, 4000, 725, 3991.11],
   },
 ];
 
@@ -247,12 +247,8 @@ export const salesLineChartOptions = {
 
 export const dailyVisitsBarChartData = [
   {
-    name: "Mobile Browser",
+    name: "Expenditure",
     data: [44, 55, 57, 56],
-  },
-  {
-    name: "Desktop",
-    data: [76, 85, 101, 98],
   },
 ];
 

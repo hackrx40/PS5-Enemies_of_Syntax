@@ -18,7 +18,7 @@ const BarChart = () => {
         borderColor: "divider",
       }}
     >
-      <Typography variant="h5">Daily Visits Insights</Typography>
+      <Typography variant="h5">Credit limit</Typography>
       <Chart
         options={dailyVisitsBarChartOptions}
         series={dailyVisitsBarChartData}
