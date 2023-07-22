@@ -10,6 +10,8 @@ import Box from "@mui/material/Box";
 import { TbCoinRupee } from "react-icons/tb"
 import { useEffect } from "react";
 import axios from "axios";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
 const data = {
   coupons: [
@@ -226,12 +228,12 @@ const Coupons = ({ setPoints, points }) => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="All" />
+          {/* <Tab label="All" /> */}
           <Tab label="Food" />
           <Tab label="Transport" />
           <Tab label="Utilities" />
         </Tabs>
-        <CustomTabPanel value={value} index={0}>
+        {/* <CustomTabPanel value={value} index={0}>
           <Grid container spacing={3}>
             {dynamicData?.map((coupon) => {
               return (
@@ -247,7 +249,7 @@ const Coupons = ({ setPoints, points }) => {
               );
             })}
           </Grid>
-        </CustomTabPanel>
+        </CustomTabPanel> */}
         <CustomTabPanel value={value} index={0}>
           <Grid container spacing={3}>
             {data.coupons.map((coupon) => {
