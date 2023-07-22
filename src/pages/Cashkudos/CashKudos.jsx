@@ -151,6 +151,11 @@ const CashKudos = () => {
                 </Grid>
             </Grid>
         </ComponentWrapper>
+        <br />
+        <br />
+        <br />
+        <Typography variant="h5">Upcoming Events</Typography>
+
         <Splide options={{
             rewind: true,
             gap: '1rem',
@@ -198,6 +203,9 @@ const CashKudos = () => {
 
 
         </Splide>
+        <br />
+        <br />
+        <br />
         <Coupons setPoints={setPoints} points={points} />
 
     </Box >;
