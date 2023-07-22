@@ -23,6 +23,29 @@ const CashKudos = () => {
     });
     const [points, setPoints] = useState(1000);
 
+    const getPoints = async () => {
+        var config = {
+            method: 'get',
+            url: 'https://backend-r677breg7a-uc.a.run.app/api/accounts/profile/',
+            headers: {
+                "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjQ3NjczLCJpYXQiOjE2ODk5ODg0NzMsImp0aSI6Ijk2YWJkYmQ5ZjZjMTQyYjZiMzEzNDJlZGM0NjFjZGFjIiwidXNlcl9pZCI6MX0.t81v7VQX_Z9aZioT2jMjpYAxBECPKXOSgX2iiVcpi-o',
+            }
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(response.data.points);
+                setPoints(response.data.points);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    useEffect(() => {
+        getPoints();
+    }, []);
+
     var mylevel = 2;
     return <Box sx={{ pt: "80px", pb: "20px" }}>
         <ComponentWrapper>
@@ -131,7 +154,7 @@ const CashKudos = () => {
                 </Grid>
             </Grid>
         </ComponentWrapper>
-        <Coupons setPoints={setPoints} points={points} />
+        <Coupons getPoints={getPoints}/>
 
     </Box >;
 }

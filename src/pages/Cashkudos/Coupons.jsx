@@ -14,107 +14,88 @@ import axios from "axios";
 const data = {
   coupons: [
     {
-      coupon_id: 1,
-      category: "Food",
+      pk: 1,
       name: "Delicious Diner",
-      coupon_code: "YUMMY10",
-      discount_percent: 10,
-      valid_from: "2023-07-01",
-      valid_until: "2023-07-31",
-      price: 100,
+      category: "Food",
+      discount: 10,
+      expiry_date: "2023-07-31",
+      value_points: 100
     },
     {
-      coupon_id: 2,
+      pk: 2,
+      name: "Pizza Paradise",
       category: "Food",
-      restaurant_name: "Pizza Paradise",
-      coupon_code: "PIZZA20",
-      discount_percent: 20,
-      valid_from: "2023-08-01",
-      valid_until: "2023-08-31",
-      price: 200,
-
+      discount: 10,
+      expiry_date: "2023-08-31",
+      value_points: 200
     },
     {
-      coupon_id: 3,
+      pk: 3,
+      name: "Tasty Tacos",
       category: "Food",
-      restaurant_name: "Tasty Tacos",
-      coupon_code: "TACO15",
-      discount_percent: 15,
-      valid_from: "2023-09-01",
-      valid_until: "2023-09-30",
-      price: 300,
-
-    },
+      discount: 10,
+      expiry_date: "2023-09-30",
+      value_points: 300
+    }
   ],
   coupons2: [
     {
-      coupon_id: 4,
+      pk: 4,
+      name: "Cabs",
       category: "Transport",
-      coupon_code: "RIDENOW",
-      discount_percent: 25,
-      valid_from: "2023-07-15",
-      valid_until: "2023-07-31",
-      price: 300,
-
-    },
-    {
-      coupon_id: 5,
+      discount: 10,
+      expiry_date: "2023-07-31",
+      value_points: 300
+  },
+  {
+      pk: 5,
+      name: "Train Tickets Offer",
       category: "Transport",
-      coupon_code: "OLA50",
-      discount_percent: 50,
-      valid_from: "2023-08-01",
-      valid_until: "2023-08-15",
-      price: 1000,
-
-    },
-    {
-      coupon_id: 6,
-      category: "Uber",
-      coupon_code: "UBER10",
-      discount_percent: 10,
-      valid_from: "2023-07-20",
-      valid_until: "2023-07-31",
-      price: 500,
-    },
+      discount: 10,
+      expiry_date: "2023-08-15",
+      value_points: 1000
+  },
+  {
+      pk: 6,
+      name: "Air India",
+      category: "Transport",
+      discount: 10,
+      expiry_date: "2023-07-31",
+      value_points: 2000
+  }
   ],
   coupons3: [
     {
-      coupon_id: 7,
+      pk: 7,
+      name: "Fashion Junction",
       category: "Shopping",
-      store_name: "Fashion Junction",
-      coupon_code: "FASHION25",
-      discount_percent: 25,
-      valid_from: "2023-07-01",
-      valid_until: "2023-07-31",
-      price: 500,
-
-    },
-    {
-      coupon_id: 8,
+      discount: 25,
+      expiry_date: "2023-07-31",
+      value_points: 500
+  },
+  {
+      pk: 8,
+      name: "ElectroMart",
       category: "Shopping",
-      store_name: "ElectroMart",
-      coupon_code: "ELECTRO20",
-      discount_percent: 20,
-      valid_from: "2023-08-01",
-      valid_until: "2023-08-31",
-      price: 700,
-
-    },
+      discount: 10,
+      expiry_date: "2023-08-31",
+      value_points: 700
+  }
   ],
 };
 
-const Coupons = ({ setPoints, points }) => {
+const Coupons = ({getPoints}) => {
   const [dynamicData, setDynamicData] = React.useState();
   useEffect(() => {
     var config = {
       method: 'get',
-      url: 'https://eaf4-103-149-94-226.ngrok-free.app/api/budget/coupons/',
+      url: 'https://backend-r677breg7a-uc.a.run.app/api/budget/coupons/',
       headers: {}
     };
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(response.data);
         setDynamicData(response.data);
         console.log(dynamicData);
       })
@@ -123,6 +104,7 @@ const Coupons = ({ setPoints, points }) => {
       });
   }, []);
   const CouponLayout = ({
+    pk,
     title,
     description,
     discount,
@@ -131,10 +113,23 @@ const Coupons = ({ setPoints, points }) => {
   }) => {
     const [coupon, setCoupon] = React.useState("######");
 
-    const handleRedemption = (title, value) => {
-      setCoupon(title);
-      setPoints((prev) => prev - value);
-      console.log(title, points);
+    const handleRedemption = (pk) => {
+      var config = {
+        method: 'get',
+        url: `https://backend-r677breg7a-uc.a.run.app/api/budget/redeemcoupons/${pk}/`,
+        headers: {
+          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjQ3NjczLCJpYXQiOjE2ODk5ODg0NzMsImp0aSI6Ijk2YWJkYmQ5ZjZjMTQyYjZiMzEzNDJlZGM0NjFjZGFjIiwidXNlcl9pZCI6MX0.t81v7VQX_Z9aZioT2jMjpYAxBECPKXOSgX2iiVcpi-o',
+        }
+      };
+  
+      axios(config)
+        .then(function (response) {
+          console.log(response.data);
+          getPoints();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
 
     return (
@@ -151,7 +146,7 @@ const Coupons = ({ setPoints, points }) => {
               <Typography sx={{ fontSize: "1.4rem" }}>
                 {discount}% OFF
               </Typography>
-              <Typography variant="h6">{description}</Typography> <br />
+              <Typography variant="h6">{title}</Typography> <br />
               <Typography sx={{ fontSize: "0.8rem", color: "#FDC448" }} component="div">
                 <TbCoinRupee style={{ fontSize: "20px", transform: "translateY(4px)" }} /> {value}
               </Typography>
@@ -172,7 +167,7 @@ const Coupons = ({ setPoints, points }) => {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    handleRedemption(title, value);
+                    handleRedemption(pk);
                   }}
                   style={{
                     backgroundColor: "#f50057",
@@ -229,14 +224,16 @@ const Coupons = ({ setPoints, points }) => {
           <Tab label="All" />
           <Tab label="Food" />
           <Tab label="Transport" />
-          <Tab label="Utilities" />
+          <Tab label="Shopping" />
         </Tabs>
         <CustomTabPanel value={value} index={0}>
           <Grid container spacing={3}>
             {dynamicData?.map((coupon) => {
+              console.log(coupon.discount);
               return (
                 <Grid item xs={12} md={6} lg={4}>
                   <CouponLayout
+                    pk={coupon.pk}
                     title={coupon.name}
                     description={coupon.category}
                     discount={coupon.discount}
@@ -248,34 +245,18 @@ const Coupons = ({ setPoints, points }) => {
             })}
           </Grid>
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={0}>
+        <CustomTabPanel value={value} index={1}>
           <Grid container spacing={3}>
             {data.coupons.map((coupon) => {
               return (
                 <Grid item xs={12} md={6} lg={4}>
                   <CouponLayout
-                    title={coupon.coupon_code}
+                    pk={coupon.pk}
+                    title={coupon.name}
                     description={coupon.category}
-                    discount={coupon.discount_percent}
-                    valid_until={coupon.valid_until}
-                    value={coupon.price}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
-          <Grid container spacing={3}>
-            {data.coupons2.map((coupon) => {
-              return (
-                <Grid item xs={12} md={6} lg={4}>
-                  <CouponLayout
-                    title={coupon.coupon_code}
-                    description={coupon.category}
-                    discount={coupon.discount_percent}
-                    valid_until={coupon.valid_until}
-                    value="100"
+                    discount={coupon.discount}
+                    valid_until={coupon.expiry_date}
+                    value={coupon.value_points}
                   />
                 </Grid>
               );
@@ -284,15 +265,34 @@ const Coupons = ({ setPoints, points }) => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           <Grid container spacing={3}>
+            {data.coupons2.map((coupon) => {
+              return (
+                <Grid item xs={12} md={6} lg={4}>
+                  <CouponLayout
+                    pk={coupon.pk}
+                    title={coupon.name}
+                    description={coupon.category}
+                    discount={coupon.discount}
+                    valid_until={coupon.expiry_date}
+                    value={coupon.value_points}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={3}>
+          <Grid container spacing={3}>
             {data.coupons3.map((coupon) => {
               return (
                 <Grid item xs={12} md={6} lg={4}>
                   <CouponLayout
-                    title={coupon.coupon_code}
+                    pk={coupon.pk}
+                    title={coupon.name}
                     description={coupon.category}
-                    discount={coupon.discount_percent}
-                    valid_until={coupon.valid_until}
-                    value="100"
+                    discount={coupon.discount}
+                    valid_until={coupon.expiry_date}
+                    value={coupon.value_points}
                   />
                 </Grid>
               );
