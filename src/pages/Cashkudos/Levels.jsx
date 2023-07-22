@@ -1,62 +1,101 @@
 import { Avatar, Box, Stack, Typography } from "@mui/material";
-import React from "react";
-import "./Level.css";
+import React, { useState, useEffect } from "react";
+import { countriesData } from "../../data/TopCountries";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const leaderboardData = [
-  {
-    name: "ABC",
-    virtual_cash: "500",
-  },
-  {
-    name: "XYZ",
-    virtual_cash: "300",
-  },
-  {
-    name: "BCD",
-    virtual_cash: "100",
-  },
-  {
-    name: "PQR",
-    virtual_cash: "20",
-  },
-];
+const Levels = ({ mylevel }) => {
 
-const Levels = () => {
-  return (
-    <Box sx={{ padding: "15px" }}>
-      <Typography variant="h5">Levels</Typography>
-      <div id="leaderboard">
-        <div class="ribbon"></div>
-        <table>
-          {leaderboardData.map((item, index) => {
-            <tr>
-              <td class="number">{index}</td>
-              <td class="name">{item.name}</td>
-              <td class="points">
-                {item.virtual_cash}
-                <img
-                  class="gold-medal"
-                  src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
-                  alt="gold medal"
-                />
-              </td>
-            </tr>;
-          })}
-          {/* <tr>
-            <td class="number">1</td>
-            <td class="name">Lee Taeyong</td>
-            <td class="points"> 258.244
-              <img
-                class="gold-medal"
-                src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
-                alt="gold medal"
-              />
-            </td>
-          </tr> */}
-        </table>
-      </div>
-    </Box>
-  );
+    const [countries, setCountries] = useState([])
+    const { id } = useParams()
+
+    // useEffect   (() => {
+    //   let config = {
+    //     method: 'get',
+    //     maxBodyLength: Infinity,
+    //     url: `https://easy-ruby-hen-cap.cyclic.app/product/${id}`,
+    //     headers: { }
+    //   };
+
+    //   axios.request(config)
+    //   .then((response) => {
+    //     console.log(response.data.product);
+    //     setCountries(response.data.product);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // }, [])
+
+    return (
+        <Box sx={{ padding: "15px" }}>
+            <Typography variant="h5">Levels</Typography>
+            <Typography sx={{ fontSize: "12px", opacity: 0.7 }}>
+                Saving history for 2023
+            </Typography>
+            <Box sx={{ my: 2 }}>
+                {countriesData.map(({ id, name, amount, flag }, index) => (
+
+                    (index + 1) <= Number(mylevel) ? (
+                        <Stack
+                            direction={"row"}
+                            alignItems="center"
+                            justifyContent={"space-between"}
+                            spacing={2}
+                            key={id}
+                            sx={{ my: 3 }}
+                            style={{ textDecoration: "line-through" }}
+                        >
+                            <Stack direction={"row"} alignItems="center" spacing={1}>
+                                <Avatar src="https://clipartix.com/wp-content/uploads/2018/03/cartoon-trophy-2018-26.jpg" sx={{ width: 30, height: 30 }} />
+                                <Typography>Level {index + 1}</Typography>
+                            </Stack>
+                            <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
+                                ₹{amount}
+                            </Typography>
+                        </Stack>
+                    )
+                        :
+                        (index) == Number(mylevel) ? (
+                            <Stack
+                                direction={"row"}
+                                alignItems="center"
+                                justifyContent={"space-between"}
+                                spacing={2}
+                                key={id}
+                                sx={{ my: 3 }}
+                            >
+                                <Stack direction={"row"} alignItems="center" spacing={1}>
+                                    <Avatar src="https://clipartix.com/wp-content/uploads/2018/03/cartoon-trophy-2018-26.jpg" sx={{ width: 40, height: 40 }} />
+                                    <Typography style={{ fontWeight: 700 }}>Level {index + 1}</Typography>
+                                </Stack>
+                                <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
+                                    ₹{amount}
+                                </Typography>
+                            </Stack>
+                        ) :
+                            (<Stack
+                                direction={"row"}
+                                alignItems="center"
+                                justifyContent={"space-between"}
+                                spacing={2}
+                                key={id}
+                                sx={{ my: 3 }}
+
+                            >
+                                <Stack direction={"row"} alignItems="center" spacing={1}>
+                                    <Avatar src="https://clipartix.com/wp-content/uploads/2018/03/cartoon-trophy-2018-26.jpg" sx={{ width: 30, height: 30 }} />
+                                    <Typography>Level {index + 1}</Typography>
+                                </Stack>
+                                <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
+                                    ₹{amount}
+                                </Typography>
+                            </Stack>)
+
+                ))}
+            </Box>
+        </Box>
+    );
 };
 
 export default Levels;
