@@ -1,11 +1,12 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { BsGraphUpArrow, BsGraphDownArrow } from "react-icons/bs";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -33,22 +34,6 @@ CustomTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const getData = async() => {
-  let headersList = {
-    "Accept": "*/*",
-    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjAwNjU3LCJpYXQiOjE2ODk5NDE0NTcsImp0aSI6IjM4OTgzY2RiN2E4NjQ2ZDBhODI0NWYxODllNjEzMmM1IiwidXNlcl9pZCI6MX0.Y8xupTUlhL6X506p5uM0-pVeHDZdCmlhXETfqqa44ag"
-   }
-   
-   let response = await fetch("https://backend-r677breg7a-uc.a.run.app/api/bank/account/", { 
-     method: "GET",
-     headers: headersList
-   });
-   
-   let data = await response.text();
-   console.log(data);
-}
-
 const UserDashboardData = () => {
   const ComponentWrapper = styled(Box)({
     marginTop: "10px",
@@ -61,13 +46,38 @@ const UserDashboardData = () => {
     setValue(newValue);
   };
 
-  getData();
-
   const [value2, setValue2] = React.useState(0);
 
   const handleChangeTab2 = (event, newValue) => {
     setValue2(newValue);
   };
+
+  const [balance, setBalance] = React.useState([{
+    balance: "0.00"
+  }]);
+
+  useEffect(() => {
+    let config = {
+      method: 'get',
+      url: 'https://backend-r677breg7a-uc.a.run.app/api/bank/account/',
+      headers: { 
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjAwNjU3LCJpYXQiOjE2ODk5NDE0NTcsImp0aSI6IjM4OTgzY2RiN2E4NjQ2ZDBhODI0NWYxODllNjEzMmM1IiwidXNlcl9pZCI6MX0.Y8xupTUlhL6X506p5uM0-pVeHDZdCmlhXETfqqa44ag'
+      }
+    };
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(response.data);
+        setBalance(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // let data = response.json();
+  // console.log(data);
+  // setBalance(data[0]);
 
   return (
     <Box>
@@ -88,7 +98,7 @@ const UserDashboardData = () => {
               >
                 <Typography variant="h6">Net Profit</Typography>
                 <Typography variant="h4" style={{ color: "#11141c" }}>
-                  ₹ 100000
+                  ₹ 100000.00
                 </Typography>
               </Paper>
             </ComponentWrapper>
@@ -109,7 +119,7 @@ const UserDashboardData = () => {
               >
                 <Typography variant="h6">Your balance</Typography>
                 <Typography variant="h4" style={{ color: "#11141c" }}>
-                  ₹ 50000
+                  ₹ {balance[0].balance}
                 </Typography>
               </Paper>
             </ComponentWrapper>
@@ -151,7 +161,7 @@ const UserDashboardData = () => {
               >
                 <Typography variant="h6">Total Investment</Typography>
                 <Typography variant="h4" style={{ color: "#11141c" }}>
-                  ₹ 10000
+                  ₹ 10000.00
                 </Typography>
               </Paper>
             </ComponentWrapper>
@@ -188,17 +198,17 @@ const UserDashboardData = () => {
                 </Tabs>
                 <CustomTabPanel value={value} index={0}>
                   <Typography variant="h4" style={{ color: "#11141c" }}>
-                    ₹ 750000
+                    ₹ 750000.00
                   </Typography>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
                   <Typography variant="h4" style={{ color: "#11141c" }}>
-                    ₹ 50000
+                    ₹ 50000.00
                   </Typography>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
                   <Typography variant="h4" style={{ color: "#11141c" }}>
-                    ₹ 5000
+                    ₹ 5000.00
                   </Typography>
                 </CustomTabPanel>
                 <Typography>
@@ -239,17 +249,17 @@ const UserDashboardData = () => {
                   </Tabs>
                   <CustomTabPanel value={value2} index={0}>
                     <Typography variant="h4" style={{ color: "#11141c" }}>
-                      ₹ 100000
+                      ₹ 100000.00
                     </Typography>
                   </CustomTabPanel>
                   <CustomTabPanel value={value2} index={1}>
                     <Typography variant="h4" style={{ color: "#11141c" }}>
-                      ₹ 50000
+                      ₹ 50000.00
                     </Typography>
                   </CustomTabPanel>
                   <CustomTabPanel value={value2} index={2}>
                     <Typography variant="h4" style={{ color: "#11141c" }}>
-                      ₹ 5000
+                      ₹ 5000.00
                     </Typography>
                   </CustomTabPanel>
                   <Typography>
