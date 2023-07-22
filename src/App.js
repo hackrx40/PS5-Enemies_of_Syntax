@@ -36,6 +36,7 @@ import Admin from "./pages/Admin";
 import Otp from "./pages/Auth/Otp";
 import CashKudos from "./pages/Cashkudos/CashKudos";
 import Bot from "./pages/Bots";
+import Eventpage from "./pages/Events/Eventpage";
 
 const sideBarWidth = 250;
 
@@ -107,7 +108,7 @@ function App() {
             <Route path="/login" element={<Login/>} />
             <Route path="/signup" element={<Signup/>} />
             <Route path="/admin" element={<Admin/>} />
-            <Route path="/events" element={<Events/>}/>
+            {/* <Route path="/events" element={<Events/>}/> */}
 
 
             {/* new */}
@@ -116,6 +117,8 @@ function App() {
             <Route path='/profile/transactions' element={<Transactions/>}/>
             <Route path='/virtualassistant' element={<Bot/>}/>
             <Route path='/goals' element={<Bot/>}/>
+            <Route path='/event' element={<Eventpage/>}/>
+            
           </Routes>
           <Footer />
         </Box>
