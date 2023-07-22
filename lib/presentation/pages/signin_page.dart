@@ -88,7 +88,7 @@ class _SigninPageState extends State<SigninPage> {
                       return null;
                     },
                   ),
-                  const VerticalGap10(),
+                  const VerticalGap20(),
                   TextFormField(
                     controller: passwordController,
                     decoration: InputDecoration(
