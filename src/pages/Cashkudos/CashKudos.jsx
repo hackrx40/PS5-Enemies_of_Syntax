@@ -16,12 +16,28 @@ import { customers } from "../../data/customers";
 import { transactions, transactionsColumns } from "../../data/transactions";
 
 const CashKudos = () => {
-
-    const ComponentWrapper = styled(Box)({
-        marginTop: "10px",
-        paddingBottom: "10px",
+  const navigate = useNavigate();
+  const eventfunction = () => {
+    Swal.fire({
+      title: "Do you want to register to the event?",
+      showDenyButton: true,
+      confirmButtonText: "Agree",
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Registered!", "", "success");
+        navigate("/event");
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
     });
-    const [points, setPoints] = useState(1000);
+  };
+  const ComponentWrapper = styled(Box)({
+    marginTop: "10px",
+    paddingBottom: "10px",
+  });
+  const [points, setPoints] = useState(1000);
 
     const getPoints = async () => {
         var config = {

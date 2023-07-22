@@ -46,7 +46,7 @@ const UserSelling = () => {
           <SplideSlide>
             <a href="https://www.bajajfinserv.in/emi-network" target="_blank" rel="noreferrer">
               <Paper sx={{ boxShadow: "none !important", borderRadius: "12px", borderStyle: "solid", borderWidth: "1px", borderColor: "divider", height: "100%", }}>
-                <img alt="bajaj" src="https://cms-assets.bajajfinserv.in/is/image/bajajfinance/iemi-banner-4?scl=1&fmt=png-alpha" width={350} height={180}></img>
+                <img alt="bajaj" src="https://cms-assets.bajajfinserv.in/is/image/bajajfinance/car-insurance-v1-5?scl=1&fmt=png-alpha" width={350} height={180}></img>
               </Paper>
             </a>
           </SplideSlide>
