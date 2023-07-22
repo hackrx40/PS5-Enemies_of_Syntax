@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import { TbCoinRupee } from "react-icons/tb"
 import { useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const data = {
   coupons: [
@@ -125,7 +126,9 @@ const Coupons = ({getPoints}) => {
       axios(config)
         .then(function (response) {
           console.log(response.data);
+          setCoupon(response.data.code);
           getPoints();
+          Swal.fire(`Coupon Redeemed! ${response.data.code}`, "", "success");
         })
         .catch(function (error) {
           console.log(error);
