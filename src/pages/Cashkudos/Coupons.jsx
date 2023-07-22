@@ -10,8 +10,6 @@ import Box from "@mui/material/Box";
 import { TbCoinRupee } from "react-icons/tb"
 import { useEffect } from "react";
 import axios from "axios";
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
 const data = {
   coupons: [
