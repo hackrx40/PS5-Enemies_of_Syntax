@@ -7,7 +7,7 @@ import "./Coupon.css";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { TbCoinRupee } from "react-icons/tb"
+import { TbCoinRupee } from "react-icons/tb";
 import { useEffect } from "react";
 import axios from "axios";
 
@@ -19,7 +19,7 @@ const data = {
       category: "Food",
       discount: 10,
       expiry_date: "2023-07-31",
-      value_points: 100
+      value_points: 100,
     },
     {
       pk: 2,
@@ -27,7 +27,7 @@ const data = {
       category: "Food",
       discount: 10,
       expiry_date: "2023-08-31",
-      value_points: 200
+      value_points: 200,
     },
     {
       pk: 3,
@@ -35,8 +35,8 @@ const data = {
       category: "Food",
       discount: 10,
       expiry_date: "2023-09-30",
-      value_points: 300
-    }
+      value_points: 300,
+    },
   ],
   coupons2: [
     {
@@ -45,24 +45,24 @@ const data = {
       category: "Transport",
       discount: 10,
       expiry_date: "2023-07-31",
-      value_points: 300
-  },
-  {
+      value_points: 300,
+    },
+    {
       pk: 5,
       name: "Train Tickets Offer",
       category: "Transport",
       discount: 10,
       expiry_date: "2023-08-15",
-      value_points: 1000
-  },
-  {
+      value_points: 1000,
+    },
+    {
       pk: 6,
       name: "Air India",
       category: "Transport",
       discount: 10,
       expiry_date: "2023-07-31",
-      value_points: 2000
-  }
+      value_points: 2000,
+    },
   ],
   coupons3: [
     {
@@ -71,26 +71,26 @@ const data = {
       category: "Shopping",
       discount: 25,
       expiry_date: "2023-07-31",
-      value_points: 500
-  },
-  {
+      value_points: 500,
+    },
+    {
       pk: 8,
       name: "ElectroMart",
       category: "Shopping",
       discount: 10,
       expiry_date: "2023-08-31",
-      value_points: 700
-  }
+      value_points: 700,
+    },
   ],
 };
 
-const Coupons = ({getPoints}) => {
+const Coupons = ({ getPoints }) => {
   const [dynamicData, setDynamicData] = React.useState();
   useEffect(() => {
     var config = {
-      method: 'get',
-      url: 'https://backend-r677breg7a-uc.a.run.app/api/budget/coupons/',
-      headers: {}
+      method: "get",
+      url: "https://backend-r677breg7a-uc.a.run.app/api/budget/coupons/",
+      headers: {},
     };
 
     axios(config)
@@ -115,13 +115,14 @@ const Coupons = ({getPoints}) => {
 
     const handleRedemption = (pk) => {
       var config = {
-        method: 'get',
+        method: "get",
         url: `https://backend-r677breg7a-uc.a.run.app/api/budget/redeemcoupons/${pk}/`,
         headers: {
-          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjQ3NjczLCJpYXQiOjE2ODk5ODg0NzMsImp0aSI6Ijk2YWJkYmQ5ZjZjMTQyYjZiMzEzNDJlZGM0NjFjZGFjIiwidXNlcl9pZCI6MX0.t81v7VQX_Z9aZioT2jMjpYAxBECPKXOSgX2iiVcpi-o',
-        }
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjQ3NjczLCJpYXQiOjE2ODk5ODg0NzMsImp0aSI6Ijk2YWJkYmQ5ZjZjMTQyYjZiMzEzNDJlZGM0NjFjZGFjIiwidXNlcl9pZCI6MX0.t81v7VQX_Z9aZioT2jMjpYAxBECPKXOSgX2iiVcpi-o",
+        },
       };
-  
+
       axios(config)
         .then(function (response) {
           console.log(response.data);
@@ -146,17 +147,19 @@ const Coupons = ({getPoints}) => {
               <Typography sx={{ fontSize: "1.4rem" }}>
                 {discount}% OFF
               </Typography>
-              <Typography variant="h6">{title}</Typography> <br />
-              <Typography sx={{ fontSize: "0.8rem", color: "#FDC448" }} component="div">
-                <TbCoinRupee style={{ fontSize: "20px", transform: "translateY(4px)" }} /> {value}
+              <Typography sx={{ fontSize: "1rem" }}>{title}</Typography> <br />
+              <Typography
+                sx={{ fontSize: "0.8rem", color: "#FDC448" }}
+                component="div"
+              >
+                <TbCoinRupee
+                  style={{ fontSize: "20px", transform: "translateY(4px)" }}
+                />{" "}
+                {value}
               </Typography>
             </div>
             <div>
-              <Typography
-                sx={{ color: "green", fontWeight: "600" }}
-                variant="h5"
-                component="div"
-              >
+              <Typography sx={{ color: "green" }} variant="h6" component="div">
                 {coupon}
               </Typography>
               <span style={{ fontSize: "0.7rem" }}>

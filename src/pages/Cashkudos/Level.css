@@ -24,6 +24,7 @@ table {
   table-layout: fixed;
   color: #141a39;
   cursor: default;
+  /* transform: translateY(-10px); */
 }
 
 tr {
@@ -84,8 +85,10 @@ td {
 }
 
 .ribbon {
-  width: 20rem;
-  height: 4rem;
+  min-width: 23rem;
+  height: 5rem;
+  position: relative;
+  top: 4.8rem;
   background-color: #5c5be5;
   -webkit-box-shadow: 0px 15px 11px -6px #7a7a7d;
   box-shadow: 0px 15px 11px -6px #7a7a7d;

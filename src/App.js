@@ -26,7 +26,6 @@ import {
   Signup,
   Events,
 } from "./pages";
-import Footer from "./components/common/Footer";
 import { useEffect } from "react";
 import alanBtn from "@alan-ai/alan-sdk-web";
 import UserSelling from "./pages/UserSelling";
@@ -120,7 +119,6 @@ function App() {
             <Route path='/event' element={<Eventpage/>}/>
             
           </Routes>
-          <Footer />
         </Box>
       </Box>
     </div>
