@@ -181,7 +181,7 @@ class _SigninPageState extends State<SigninPage> {
                 flutterLocalNotificationsPlugin.show(
                     1,
                     "Hey There!",
-                    "Today begins your journey to a financially organised life",
+                    "Continue your journey to a financially organised life",
                     NotificationDetails(
                         android: AndroidNotificationDetails(
                       channel.id,
