@@ -14,34 +14,57 @@ import { FaEllipsisH, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { customers } from "../../data/customers";
 import { transactions, transactionsColumns } from "../../data/transactions";
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 
 const CashKudos = () => {
-    const navigate = useNavigate();
-    const eventfunction = () => {
-        Swal.fire({
-            title: 'Do you want to register to the event?',
-            showDenyButton: true,
-            confirmButtonText: 'Agree',
-            denyButtonText: `Cancel`,
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                Swal.fire('Registered!', '', 'success');
-                navigate("/event");
-            } else if (result.isDenied) {
-                Swal.fire('Changes are not saved', '', 'info')
-            }
-        })
-    }
-    const ComponentWrapper = styled(Box)({
-        marginTop: "10px",
-        paddingBottom: "10px",
+  const navigate = useNavigate();
+  const eventfunction = () => {
+    Swal.fire({
+      title: "Do you want to register to the event?",
+      showDenyButton: true,
+      confirmButtonText: "Agree",
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Registered!", "", "success");
+        navigate("/event");
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
     });
-    const [points, setPoints] = useState(1000);
+  };
+  const ComponentWrapper = styled(Box)({
+    marginTop: "10px",
+    paddingBottom: "10px",
+  });
+  const [points, setPoints] = useState(1000);
+
+    const getPoints = async () => {
+        var config = {
+            method: 'get',
+            url: 'https://backend-r677breg7a-uc.a.run.app/api/accounts/profile/',
+            headers: {
+                "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjQ3NjczLCJpYXQiOjE2ODk5ODg0NzMsImp0aSI6Ijk2YWJkYmQ5ZjZjMTQyYjZiMzEzNDJlZGM0NjFjZGFjIiwidXNlcl9pZCI6MX0.t81v7VQX_Z9aZioT2jMjpYAxBECPKXOSgX2iiVcpi-o',
+            }
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(response.data.points);
+                setPoints(response.data.points);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    useEffect(() => {
+        getPoints();
+    }, []);
 
     var mylevel = 2;
     return <Box sx={{ pt: "80px", pb: "20px" }}>
@@ -206,7 +229,8 @@ const CashKudos = () => {
         <br />
         <br />
         <br />
-        <Coupons setPoints={setPoints} points={points} />
+        {/* <Coupons setPoints={setPoints} points={points} /> */}
+        <Coupons getPoints={getPoints}/>
 
     </Box >;
 }
