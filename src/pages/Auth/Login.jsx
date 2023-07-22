@@ -106,7 +106,7 @@ const Login = () => {
           >
             <img
               src={
-                "https://i.pinimg.com/736x/90/ea/63/90ea638a6f8e9ea59721b9f12b1f36b8.jpg"
+                "https://static.vecteezy.com/system/resources/previews/018/869/403/original/circle-icon-clip-art-alot-of-money-profit-illustration-finance-business-free-vector.jpg"
               }
               alt="signup"
               style={{ width: "70%" }}

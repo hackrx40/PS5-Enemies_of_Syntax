@@ -112,7 +112,7 @@ const Navbar = ({ sideBarWidth, handleDrawerToggle }) => {
               </IconButton>
             </Tooltip>
 
-            <ProfileMenu />
+            {/* <ProfileMenu /> */}
           </Stack>
         </Box>
       </Toolbar>

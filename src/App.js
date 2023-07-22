@@ -36,6 +36,7 @@ import Otp from "./pages/Auth/Otp";
 import CashKudos from "./pages/Cashkudos/CashKudos";
 import Bot from "./pages/Bots";
 import Eventpage from "./pages/Events/Eventpage";
+import AlanHooks from "./AlanHooks"
 
 const sideBarWidth = 250;
 
@@ -47,16 +48,16 @@ function App() {
     setMobileOpen(!mobileOpen);
   };
 
-  useEffect(() => {
-    alanBtn({
-      key: "07070e457e92f6e7f793ccf062512ba02e956eca572e1d8b807a3e2338fdd0dc/stage",
-      onCommand: (commandData) => {
-        if (commandData.command === "go:back") {
-          // Call the client code that will react to the received command
-        }
-      },
-    });
-  }, []);
+  // useEffect(() => {
+  //   alanBtn({
+  //     key: "07070e457e92f6e7f793ccf062512ba02e956eca572e1d8b807a3e2338fdd0dc/stage",
+  //     onCommand: (commandData) => {
+  //       if (commandData.command === "go:back") {
+  //         // Call the client code that will react to the received command
+  //       }
+  //     },
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (window.location.pathname === "/inbox") {
@@ -67,6 +68,7 @@ function App() {
 
   return (
     <div>
+    <AlanHooks />
       <Routes>
         {/* <Route path="/" element={<Landing />} /> */}
         <Route path="/login" element={<Login />} />

@@ -341,7 +341,6 @@ const Signup = () => {
                 md={6}
               >
                 <img
-                  src="https://i.pinimg.com/564x/9a/27/cf/9a27cfd8b3d84274c754c4480b81e9b4.jpg"
                   alt="signup"
                   style={{ width: "70%" }}
                 />
